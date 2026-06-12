@@ -22,6 +22,8 @@ h3.sg{font-size:14px;text-transform:uppercase;letter-spacing:.06em;color:var(--m
 .stat{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 18px;min-width:150px}
 .stat b{display:block;font-size:24px;letter-spacing:-.02em}.stat span{color:var(--mut);font-size:12.5px}
 .flow{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:0 0 14px}
+.morebtn{margin:14px 0 4px;padding:9px 18px;background:#fff;border:1px solid var(--line);border-radius:9px;color:var(--acc);font-weight:600;font-size:13px;cursor:pointer}
+.morebtn:hover{border-color:var(--acc);background:#faf7ff}
 .flow-cap{display:flex;align-items:baseline;gap:10px;margin-bottom:8px}
 .flow-cap b{font-size:14px;letter-spacing:-.01em}.flow-cap span{color:var(--mut);font-size:11.5px}
 .ov-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
@@ -86,7 +88,7 @@ img.media{aspect-ratio:auto;max-height:520px;object-fit:contain}
       <div class="stat"><b>2</b><span>automations live</span></div>
       <div class="stat"><b>9.7</b><span>top eval score</span></div>
     </div>
-    <h2>Use cases</h2><div class="ov-grid"><a class="ov-card" href="#trend-to-video"><h3>Manual Trend→Video</h3><p>Paste a trending video and we rebuild it as a Picsart-branded version. We read the video&#x27;s mechanic (how the trend actually works), regenerate it scene by scene…</p><span class="ov-n">18 items</span></a><a class="ov-card" href="#presets"><h3>Presets</h3><p>We turn winning AI-video looks into one-tap Picsart presets. We mine standout aesthetics from competitors (Higgsfield, Meta Ads Library) and our own winners, th…</p><span class="ov-n">16 items</span></a><a class="ov-card" href="#paid-ads"><h3>Paid Ads (Meta)</h3><p>An automated factory that ships 4 Picsart ads a day. Lane A re-creates our top Meta ads; Lane B invents fresh concepts around one feature. Each ad is generated …</p><span class="ov-n">14 items</span></a></div></section><section id="trend-to-video" class="page"><p class="lede">Paste a trending video and we rebuild it as a Picsart-branded version. We read the video&#x27;s mechanic (how the trend actually works), regenerate it scene by scene, score it against the original, and hand off finished cuts. Best method today: 8.7/10.</p><h2>How it really works</h2><div class="flow"><div class="flow-cap"><b>Manual Trend → Video</b><span>trigger: you paste a reference link</span></div><svg viewBox="0 0 1012 234" width="100%" style="max-width:1012px" role="img" aria-label="Manual Trend → Video pipeline">
+    <h2>Use cases</h2><div class="ov-grid"><a class="ov-card" href="#trend-to-video"><h3>Manual Trend→Video</h3><p>Paste a trending video and we rebuild it as a Picsart-branded version. We read the video&#x27;s mechanic (how the trend actually works), regenerate it scene by scene…</p><span class="ov-n">19 items</span></a><a class="ov-card" href="#presets"><h3>Presets</h3><p>We turn winning AI-video looks into one-tap Picsart presets. We mine standout aesthetics from competitors (Higgsfield, Meta Ads Library) and our own winners, th…</p><span class="ov-n">16 items</span></a><a class="ov-card" href="#paid-ads"><h3>Paid Ads (Meta)</h3><p>An automated factory that ships 4 Picsart ads a day. Lane A re-creates our top Meta ads; Lane B invents fresh concepts around one feature. Each ad is generated …</p><span class="ov-n">14 items</span></a></div></section><section id="trend-to-video" class="page"><p class="lede">Paste a trending video and we rebuild it as a Picsart-branded version. We read the video&#x27;s mechanic (how the trend actually works), regenerate it scene by scene, score it against the original, and hand off finished cuts. Best method today: 8.7/10.</p><h2>How it really works</h2><div class="flow"><div class="flow-cap"><b>Manual Trend → Video</b><span>trigger: you paste a reference link</span></div><svg viewBox="0 0 1012 234" width="100%" style="max-width:1012px" role="img" aria-label="Manual Trend → Video pipeline">
       <defs>
         <marker id="ah" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#7b2ff7"/></marker>
         <marker id="ahb" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#b8860b"/></marker>
@@ -112,133 +114,140 @@ img.media{aspect-ratio:auto;max-height:520px;object-fit:contain}
         <div><h5>Learnings</h5><ul><li>Packages the winning methods so a new trend is a single command.</li><li>Saved templates (e.g. life-paths morph, food-reveal match-cut) are reusable mechanics.</li></ul></div>
       </div>
       <div class="refs"><code>trend_replicator.py</code></div>
-    </div><h2>Outputs</h2><div class="grid"><div class="card">
+    </div><h2>Outputs</h2><h3 class="sg">Trend replications · original → our version</h3><div class="grid"><div class="card">
+      <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/0e552c69-67c6-4f99-96a6-0064c7126df4.mp4" controls preload="metadata" playsinline></video>
+      <div class="card-b">
+        <div class="card-h"><h4>Original · Zodiac trend</h4><span class="subtag">trend-replica</span></div>
+        <div class="chips"></div>
+        <p class="note">ORIGINAL source trend (we replicated this)</p>
+      </div>
+    </div><div class="card">
+      <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/03487bc4-3880-4523-9d59-4a5bf80f119f.mp4" controls preload="metadata" playsinline></video>
+      <div class="card-b">
+        <div class="card-h"><h4>Zodiac Aesthetic Collage (organic cut)</h4><span class="subtag">trend-replica</span></div>
+        <div class="chips"><span class="chip model"><b>Nano Banana Pro + ffmpeg sequence</b></span><span class="chip date"><b>2026-06-09</b></span></div>
+        <p class="note">Organic (no-endcard) cut from the trend_replicator template flow</p>
+      </div>
+    </div><div class="card">
+      <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/58031c92-62f6-41c2-9428-224ea24f5c55.mp4" controls preload="metadata" playsinline></video>
+      <div class="card-b">
+        <div class="card-h"><h4>Zodiac Aesthetic Collage (ad cut)</h4><span class="subtag">trend-replica</span></div>
+        <div class="chips"><span class="chip score s-win"><b>84</b></span><span class="chip model"><b>Nano Banana Pro + ffmpeg sequence</b></span><span class="chip date"><b>2026-06-09</b></span></div>
+        <p class="note">trend_replicator template output; score is trend-scoring total_100 (not the 1-10 eval)</p>
+      </div>
+    </div><div class="card">
+      <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/1fa148e2-56a0-4521-944b-378daa60c64f.mp4" controls preload="metadata" playsinline></video>
+      <div class="card-b">
+        <div class="card-h"><h4>Plan Life Paths (morph-sequence trend)</h4><span class="subtag">trend-replica</span></div>
+        <div class="chips"><span class="chip model"><b>Nano Banana Pro + ffmpeg minterpolate morph</b></span><span class="chip date"><b>2026-06-05</b></span></div>
+        <p class="note">Hand-built morph-transition template (Plan A→E) with EN endcard · our replica (original not archived to CDN)</p>
+      </div>
+    </div><div class="card">
+      <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/8052c77c-825f-4110-9190-a59a550840ed.mp4" controls preload="metadata" playsinline></video>
+      <div class="card-b">
+        <div class="card-h"><h4>Magic Food Reveal (clap match-cut trend)</h4><span class="subtag">trend-replica</span></div>
+        <div class="chips"><span class="chip model"><b>Nano Banana Pro + ffmpeg flash match-cut</b></span><span class="chip date"><b>2026-06-09</b></span></div>
+        <p class="note">Hand-built clap-then-flash reveal template; ad cut with endcard · our replica (original not archived to CDN)</p>
+      </div>
+    </div></div><h3 class="sg">Picsart on-brand videos</h3><div class="grid"><div class="card">
       <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/284d5ea4-683e-4f07-9231-bd19f24c8afc.mp4" controls preload="metadata" playsinline></video>
       <div class="card-b">
-        <div class="card-h"><h4>Luxury Escape Dreamscape (6-scene cinematic)</h4></div>
+        <div class="card-h"><h4>Luxury Escape Dreamscape (6-scene cinematic)</h4><span class="subtag">picsart-brand</span></div>
         <div class="chips"><span class="chip score s-ok"><b>8.7</b></span><span class="chip model"><b>Nano Banana Pro + Veo 3.1 Fast + Lyria 3</b></span><span class="chip cost">$<b>11</b></span><span class="chip date"><b>2026-05-22</b></span></div>
         <p class="note">Highest-scoring run ever; v15 multi-sample voting canonical winner</p>
       </div>
     </div><div class="card">
       <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/98eeda06-aa38-4a1d-b7bb-1865f9aaa4b7.mp4" controls preload="metadata" playsinline></video>
       <div class="card-b">
-        <div class="card-h"><h4>Cinematic Imperial (single-shot, --video conditioned)</h4></div>
+        <div class="card-h"><h4>Cinematic Imperial (single-shot, --video conditioned)</h4><span class="subtag">picsart-brand</span></div>
         <div class="chips"><span class="chip score s-ok"><b>8.45</b></span><span class="chip model"><b>Veo 3.1 Fast (--video) + Lyria 3</b></span><span class="chip cost">$<b>3</b></span><span class="chip date"><b>2026-05-22</b></span></div>
         <p class="note">v15 single-shot v3 winner; +0.5 lift from --video motion conditioning on AI source</p>
       </div>
     </div><div class="card">
       <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/0259dcf9-8630-4e2c-86be-4f9d485dd900.mp4" controls preload="metadata" playsinline></video>
       <div class="card-b">
-        <div class="card-h"><h4>Beers (surreal museum diorama, single-shot)</h4></div>
+        <div class="card-h"><h4>Beers (surreal museum diorama, single-shot)</h4><span class="subtag">picsart-brand</span></div>
         <div class="chips"><span class="chip score s-ok"><b>7.85</b></span><span class="chip model"><b>Nano Banana Pro + Veo 3.1 Fast + Lyria 3</b></span><span class="chip cost">$<b>3</b></span><span class="chip date"><b>2026-05-22</b></span></div>
         <p class="note">Single-shot 16:9 surreal diorama; source preset surreal-museum-diorama.json</p>
       </div>
     </div><div class="card">
       <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/377be835-ddfa-46dd-8014-99ddb9b3bac7.mp4" controls preload="metadata" playsinline></video>
       <div class="card-b">
-        <div class="card-h"><h4>AI Glow Up (live portrait retouch)</h4></div>
+        <div class="card-h"><h4>AI Glow Up (live portrait retouch)</h4><span class="subtag">picsart-brand</span></div>
         <div class="chips"><span class="chip score s-win"><b>9.4</b></span><span class="chip model"><b>Nano Banana Pro + Veo 3.1 Fast</b></span><span class="chip date"><b>2026-06-04</b></span></div>
         <p class="note">Lane B feature showcase WINNER; magenta light sweep glow-up reveal</p>
       </div>
     </div><div class="card">
       <img class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/bda92984-b0ff-4c73-94c4-24034656fb99.jpg" loading="lazy" alt="AI Glow Up (hero still)">
       <div class="card-b">
-        <div class="card-h"><h4>AI Glow Up (hero still)</h4></div>
+        <div class="card-h"><h4>AI Glow Up (hero still)</h4><span class="subtag">picsart-brand</span></div>
         <div class="chips"><span class="chip score s-win"><b>9.05</b></span><span class="chip model"><b>Nano Banana Pro</b></span><span class="chip date"><b>2026-06-04</b></span></div>
         <p class="note">Photo-ad hero that fed the photo-to-video step</p>
       </div>
     </div><div class="card">
       <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/2e3a2935-fad4-4f54-96ec-097b7f71ac1d.mp4" controls preload="metadata" playsinline></video>
       <div class="card-b">
-        <div class="card-h"><h4>Evolution Flow (Meta top-ad clone variation)</h4></div>
+        <div class="card-h"><h4>Evolution Flow (Meta top-ad clone variation)</h4><span class="subtag">picsart-brand</span></div>
         <div class="chips"><span class="chip score s-win"><b>9.3</b></span><span class="chip model"><b>Veo 3.1 Fast</b></span><span class="chip date"><b>2026-06-04</b></span></div>
         <p class="note">Lane A clone of a 9.85-CTR Meta ad; new face+env, same hook strategy, WINNER in 1 attempt</p>
       </div>
     </div><div class="card">
       <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/c9ed1010-5603-461f-a7bc-81db78446a42.mp4" controls preload="metadata" playsinline></video>
       <div class="card-b">
-        <div class="card-h"><h4>AI Jiggle Effect (still portrait dances)</h4></div>
+        <div class="card-h"><h4>AI Jiggle Effect (still portrait dances)</h4><span class="subtag">picsart-brand</span></div>
         <div class="chips"><span class="chip score s-win"><b>9.7</b></span><span class="chip model"><b>Veo 3.1 Fast (t2v)</b></span><span class="chip date"><b>2026-06-08</b></span></div>
         <p class="note">Highest automation-lane score; jiggle/dance feature showcase</p>
       </div>
     </div><div class="card">
       <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/7ffbb6b5-1883-44f8-9b43-456d4d8fcb63.mp4" controls preload="metadata" playsinline></video>
       <div class="card-b">
-        <div class="card-h"><h4>AI Product Shot (studio shot from phone snap)</h4></div>
+        <div class="card-h"><h4>AI Product Shot (studio shot from phone snap)</h4><span class="subtag">picsart-brand</span></div>
         <div class="chips"><span class="chip score s-win"><b>9.6</b></span><span class="chip model"><b>Nano Banana Pro + Veo 3.1 Fast</b></span><span class="chip date"><b>2026-06-10</b></span></div>
         <p class="note">Product photography feature; vase studio-transform reveal, WINNER</p>
       </div>
-    </div><div class="card">
+    </div></div><div id="more1" class="grid" style="display:none;margin-top:16px"><div class="card">
       <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/eaf2930d-f188-4ac1-9875-f26e9061955f.mp4" controls preload="metadata" playsinline></video>
       <div class="card-b">
-        <div class="card-h"><h4>AI Remove People (empty the platform)</h4></div>
+        <div class="card-h"><h4>AI Remove People (empty the platform)</h4><span class="subtag">picsart-brand</span></div>
         <div class="chips"><span class="chip score s-win"><b>9.1</b></span><span class="chip model"><b>Nano Banana Pro + Veo 3.1 Fast</b></span><span class="chip date"><b>2026-06-11</b></span></div>
         <p class="note">Latest run (2026-06-11); subway crowd-erase reveal, WINNER in 1 attempt</p>
       </div>
     </div><div class="card">
       <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/c6cef4cb-419c-4565-ab3f-8461abe82e3f.mp4" controls preload="metadata" playsinline></video>
       <div class="card-b">
-        <div class="card-h"><h4>AI Background Replace (bland to pro)</h4></div>
+        <div class="card-h"><h4>AI Background Replace (bland to pro)</h4><span class="subtag">picsart-brand</span></div>
         <div class="chips"><span class="chip score s-ok"><b>8.7</b></span><span class="chip model"><b>Nano Banana Pro + Veo 3.1 Fast</b></span><span class="chip date"><b>2026-06-06</b></span></div>
         <p class="note">Background-swap feature showcase; magenta vertical wipe reveal</p>
       </div>
     </div><div class="card">
       <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/3c564e72-2d50-493f-af27-269698bddc42.mp4" controls preload="metadata" playsinline></video>
       <div class="card-b">
-        <div class="card-h"><h4>AI Filter Avatar (Meta clone, cinematic)</h4></div>
+        <div class="card-h"><h4>AI Filter Avatar (Meta clone, cinematic)</h4><span class="subtag">picsart-brand</span></div>
         <div class="chips"><span class="chip score s-ok"><b>8.9</b></span><span class="chip model"><b>Veo 3.1 Fast</b></span><span class="chip date"><b>2026-06-06</b></span></div>
         <p class="note">Lane A clone of a 5.9-CTR Meta avatar-filter ad</p>
       </div>
     </div><div class="card">
       <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/4bfe224e-e5f0-46d7-b786-8f6c3fdd4059.mp4" controls preload="metadata" playsinline></video>
       <div class="card-b">
-        <div class="card-h"><h4>Gym Aura (Meta clone, persona)</h4></div>
+        <div class="card-h"><h4>Gym Aura (Meta clone, persona)</h4><span class="subtag">picsart-brand</span></div>
         <div class="chips"><span class="chip score s-ok"><b>8.1</b></span><span class="chip model"><b>Veo 3.1 Fast</b></span><span class="chip date"><b>2026-06-04</b></span></div>
         <p class="note">Lane A clone of a gym physique ad; dream-body hook</p>
       </div>
     </div><div class="card">
       <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/c566c726-250e-41e7-b5db-f9be67dd352f.mp4" controls preload="metadata" playsinline></video>
       <div class="card-b">
-        <div class="card-h"><h4>Meta variation persona (v17 final cut)</h4></div>
+        <div class="card-h"><h4>Meta variation persona (v17 final cut)</h4><span class="subtag">picsart-brand</span></div>
         <div class="chips"><span class="chip model"><b>Veo 3.1 Fast + Lyria 3</b></span><span class="chip date"><b>2026-06-08</b></span></div>
         <p class="note">Representative v17 meta-variation final with endcard + watermark</p>
       </div>
     </div><div class="card">
       <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/d88b520f-a64d-452d-92a3-39d851c1d7fe.mp4" controls preload="metadata" playsinline></video>
       <div class="card-b">
-        <div class="card-h"><h4>AI Expand (text-to-video cinematic)</h4></div>
+        <div class="card-h"><h4>AI Expand (text-to-video cinematic)</h4><span class="subtag">picsart-brand</span></div>
         <div class="chips"><span class="chip score s-ok"><b>7.9</b></span><span class="chip model"><b>Veo 3.1 Fast (t2v) + Lyria 3</b></span><span class="chip date"><b>2026-06-07</b></span></div>
         <p class="note">Cliff-edge frame-expand reveal; representative t2v path output</p>
       </div>
-    </div><div class="card">
-      <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/58031c92-62f6-41c2-9428-224ea24f5c55.mp4" controls preload="metadata" playsinline></video>
-      <div class="card-b">
-        <div class="card-h"><h4>Zodiac Aesthetic Collage (ad cut)</h4></div>
-        <div class="chips"><span class="chip score s-win"><b>84</b></span><span class="chip model"><b>Nano Banana Pro + ffmpeg sequence</b></span><span class="chip date"><b>2026-06-09</b></span></div>
-        <p class="note">trend_replicator template output; score is trend-scoring total_100 (not the 1-10 eval)</p>
-      </div>
-    </div><div class="card">
-      <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/03487bc4-3880-4523-9d59-4a5bf80f119f.mp4" controls preload="metadata" playsinline></video>
-      <div class="card-b">
-        <div class="card-h"><h4>Zodiac Aesthetic Collage (organic cut)</h4></div>
-        <div class="chips"><span class="chip model"><b>Nano Banana Pro + ffmpeg sequence</b></span><span class="chip date"><b>2026-06-09</b></span></div>
-        <p class="note">Organic (no-endcard) cut from the trend_replicator template flow</p>
-      </div>
-    </div><div class="card">
-      <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/1fa148e2-56a0-4521-944b-378daa60c64f.mp4" controls preload="metadata" playsinline></video>
-      <div class="card-b">
-        <div class="card-h"><h4>Plan Life Paths (morph-sequence trend)</h4></div>
-        <div class="chips"><span class="chip model"><b>Nano Banana Pro + ffmpeg minterpolate morph</b></span><span class="chip date"><b>2026-06-05</b></span></div>
-        <p class="note">Hand-built morph-transition template (Plan A→E) with EN endcard</p>
-      </div>
-    </div><div class="card">
-      <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/8052c77c-825f-4110-9190-a59a550840ed.mp4" controls preload="metadata" playsinline></video>
-      <div class="card-b">
-        <div class="card-h"><h4>Magic Food Reveal (clap match-cut trend)</h4></div>
-        <div class="chips"><span class="chip model"><b>Nano Banana Pro + ffmpeg flash match-cut</b></span><span class="chip date"><b>2026-06-09</b></span></div>
-        <p class="note">Hand-built clap-then-flash reveal template; ad cut with endcard</p>
-      </div>
-    </div></div></section><section id="presets" class="page"><p class="lede">We turn winning AI-video looks into one-tap Picsart presets. We mine standout aesthetics from competitors (Higgsfield, Meta Ads Library) and our own winners, then package each as a photo-to-video preset a user runs with one image. The lesson that reshaped this: a preset must look like the user&#x27;s world (photoreal), not like a Picsart ad.</p><h2>How it really works</h2><div class="flow"><div class="flow-cap"><b>Presets · Higgsfield replication (daily auto)</b><span>trigger: runs daily · scrapes Higgsfield</span></div><svg viewBox="0 0 1012 234" width="100%" style="max-width:1012px" role="img" aria-label="Presets · Higgsfield replication (daily auto) pipeline">
+    </div></div><button class="morebtn" onclick="var e=document.getElementById('more1');var s=e.style.display=='none';e.style.display=s?'grid':'none';this.textContent=s?'Show less':'Expand more (6)'">Expand more (6)</button></section><section id="presets" class="page"><p class="lede">We turn winning AI-video looks into one-tap Picsart presets. We mine standout aesthetics from competitors (Higgsfield, Meta Ads Library) and our own winners, then package each as a photo-to-video preset a user runs with one image. The lesson that reshaped this: a preset must look like the user&#x27;s world (photoreal), not like a Picsart ad.</p><h2>How it really works</h2><div class="flow"><div class="flow-cap"><b>Presets · Higgsfield replication (daily auto)</b><span>trigger: runs daily · scrapes Higgsfield</span></div><svg viewBox="0 0 1012 234" width="100%" style="max-width:1012px" role="img" aria-label="Presets · Higgsfield replication (daily auto) pipeline">
       <defs>
         <marker id="ah" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#7b2ff7"/></marker>
         <marker id="ahb" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#b8860b"/></marker>
@@ -458,7 +467,7 @@ img.media{aspect-ratio:auto;max-height:520px;object-fit:contain}
         <div class="chips"><span class="chip score s-ok"><b>8.7</b></span><span class="chip model"><b>veo-3.1-fast</b></span><span class="chip date"><b>2026-06-06</b></span></div>
         <p class="note">Lane B persona, background replace. WINNER.</p>
       </div>
-    </div><div class="card">
+    </div></div><div id="more2" class="grid" style="display:none;margin-top:16px"><div class="card">
       <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/acdd017c-9df1-4ef6-b269-f8c9a012d7a6.mp4" controls preload="metadata" playsinline></video>
       <div class="card-b">
         <div class="card-h"><h4>Lane A cinematic replica — Gym_1</h4><span class="subtag">ad</span></div>
@@ -493,7 +502,7 @@ img.media{aspect-ratio:auto;max-height:520px;object-fit:contain}
         <div class="chips"><span class="chip score s-win"><b>9.1</b></span><span class="chip model"><b>gemini-3-pro-image</b></span><span class="chip date"><b>2026-06-07</b></span></div>
         <p class="note">Photo still scored 9.1; video lane scored only 6.05 (REGEN) — illustrates the still &gt; motion gap.</p>
       </div>
-    </div></div><h3 class="sg">Competitor scrape</h3><div class="grid"><div class="card">
+    </div></div><button class="morebtn" onclick="var e=document.getElementById('more2');var s=e.style.display=='none';e.style.display=s?'grid':'none';this.textContent=s?'Show less':'Expand more (5)'">Expand more (5)</button><h3 class="sg">Competitor scrape</h3><div class="grid"><div class="card">
       <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/af7f8307-199d-420e-9c9c-644147fae215.mp4" controls preload="metadata" playsinline></video>
       <div class="card-b">
         <div class="card-h"><h4>Hailuo AI — Meta ad reference</h4><span class="subtag">competitor-scrape</span></div>
