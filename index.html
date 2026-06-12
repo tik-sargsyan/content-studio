@@ -1,0 +1,564 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Picsart Content Automation</title><style>
+:root{--bg:#f6f7f9;--card:#fff;--ink:#15181d;--mut:#6b7280;--line:#e6e8eb;--acc:#7b2ff7;--acc2:#111;--win:#0a8f4f;--ok:#b8860b;--low:#c0392b}
+*{box-sizing:border-box}body{margin:0;font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+a{color:inherit;text-decoration:none}
+.app{display:flex;min-height:100vh}
+.side{width:230px;flex:0 0 230px;background:#fff;border-right:1px solid var(--line);padding:22px 14px;position:sticky;top:0;height:100vh;overflow:auto}
+.brand{font-weight:700;font-size:17px;letter-spacing:-.02em;padding:0 8px 4px}
+.brand small{display:block;color:var(--mut);font-weight:500;font-size:11px;margin-top:3px}
+.nav-link{display:block;padding:9px 12px;border-radius:9px;color:var(--mut);font-weight:550;margin-top:3px}
+.nav-link:hover{background:#f1f2f4;color:var(--ink)}
+.nav-link.active{background:var(--acc);color:#fff}
+.main{flex:1;min-width:0;padding:34px 44px 80px;max-width:1180px}
+.page{display:none}.page.active{display:block;animation:f .2s ease}
+@keyframes f{from{opacity:0;transform:translateY(4px)}to{opacity:1}}
+h1{font-size:26px;letter-spacing:-.02em;margin:0 0 2px}
+h2{font-size:18px;margin:34px 0 14px;letter-spacing:-.01em}
+h3.sg{font-size:14px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);margin:26px 0 10px}
+.lede{color:var(--mut);font-size:15.5px;max-width:760px;margin:6px 0 8px}
+.stats{display:flex;gap:14px;flex-wrap:wrap;margin:22px 0}
+.stat{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 18px;min-width:150px}
+.stat b{display:block;font-size:24px;letter-spacing:-.02em}.stat span{color:var(--mut);font-size:12.5px}
+.flow{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:0 0 14px}
+.flow-cap{display:flex;align-items:baseline;gap:10px;margin-bottom:8px}
+.flow-cap b{font-size:14px;letter-spacing:-.01em}.flow-cap span{color:var(--mut);font-size:11.5px}
+.ov-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+.ov-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;transition:.15s}
+.ov-card:hover{border-color:var(--acc);box-shadow:0 6px 22px rgba(123,47,247,.08);transform:translateY(-2px)}
+.ov-card h3{margin:0 0 6px;font-size:16px}.ov-card p{color:var(--mut);font-size:13px;margin:0 0 10px}
+.ov-n{font-size:12px;font-weight:600;color:var(--acc)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+.media{width:100%;aspect-ratio:9/16;object-fit:cover;background:#0e0e10;display:block}
+img.media{aspect-ratio:auto;max-height:520px;object-fit:contain}
+.nomedia{display:flex;align-items:center;justify-content:center;color:#888;font-size:12px;aspect-ratio:9/16}
+.card-b{padding:12px 13px 14px}
+.card-h{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.card-h h4{margin:0;font-size:14px;letter-spacing:-.01em}
+.subtag{font-size:10px;color:var(--mut);text-transform:uppercase;letter-spacing:.05em}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 0}
+.chip{font-size:11.5px;color:var(--mut);background:#f1f2f4;border-radius:6px;padding:2px 7px;display:inline-flex;gap:3px;align-items:center}
+.chip b{color:var(--ink);font-weight:650}
+.chip.score b{color:#fff}.chip.score{padding:2px 8px}
+.s-win{background:var(--win)}.s-win b{color:#fff}
+.s-ok{background:var(--ok)}.s-ok b{color:#fff}
+.s-low{background:var(--low)}.s-low b{color:#fff}
+.note{color:var(--mut);font-size:12.5px;margin:8px 0 0}
+.method{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:0 0 14px}
+.method-h{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.method-h h3{margin:0;font-size:16px}
+.method-cols{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:12px 0 4px}
+.method-cols h5{margin:0 0 6px;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut)}
+.method-cols ol,.method-cols ul{margin:0;padding-left:18px}.method-cols li{font-size:13px;margin:3px 0}
+.refs{margin-top:10px}.refs code{font-size:11.5px;background:#f1f2f4;padding:2px 7px;border-radius:5px;margin-right:5px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.kind{font-size:10px;color:var(--mut);text-transform:uppercase;letter-spacing:.05em}
+.lb{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:13.5px}
+.lb th{text-align:left;background:#f1f2f4;padding:10px 12px;font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--mut)}
+.lb td{padding:10px 12px;border-top:1px solid var(--line)}.lb td.num{white-space:nowrap}
+.auto-item{background:#fff;border:1px solid var(--line);border-left:4px solid var(--mut);border-radius:12px;padding:14px 18px;margin:0 0 11px}
+.auto-item.st-live{border-left-color:var(--win)}.auto-item.st-paused{border-left-color:var(--ok)}
+.auto-item.st-deprecated,.auto-item.st-stopped{border-left-color:var(--low)}
+.auto-h{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.auto-h h4{margin:0;font-size:15px}
+.badge{font-size:10px;font-weight:700;letter-spacing:.05em;padding:3px 8px;border-radius:6px;color:#fff}
+.b-live{background:var(--win)}.b-paused{background:var(--ok)}.b-deprecated,.b-stopped{background:var(--low)}
+@media(max-width:760px){.side{display:none}.main{padding:20px}.method-cols{grid-template-columns:1fr}}
+</style></head>
+<body><div id="gate" style="position:fixed;inset:0;background:#0e0e10;display:flex;align-items:center;justify-content:center;z-index:9999;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif">
+  <form id="gform" style="background:#fff;border-radius:16px;padding:34px 30px;width:300px;box-shadow:0 12px 48px rgba(0,0,0,.5)">
+    <div style="font-weight:700;font-size:18px;letter-spacing:-.02em">Picsart Content Automation</div>
+    <div style="color:#6b7280;font-size:12.5px;margin:4px 0 20px">Sign in to view the gallery</div>
+    <input id="u" placeholder="username" autocomplete="username" style="width:100%;box-sizing:border-box;padding:11px 12px;border:1px solid #e6e8eb;border-radius:9px;margin-bottom:10px;font-size:14px">
+    <input id="p" type="password" placeholder="password" autocomplete="current-password" style="width:100%;box-sizing:border-box;padding:11px 12px;border:1px solid #e6e8eb;border-radius:9px;margin-bottom:16px;font-size:14px">
+    <button type="submit" style="width:100%;padding:11px;background:#7b2ff7;color:#fff;border:0;border-radius:9px;font-weight:650;font-size:14px;cursor:pointer">Enter</button>
+    <div id="gerr" style="color:#c0392b;font-size:12px;margin-top:12px;display:none">Wrong username or password.</div>
+  </form>
+</div><div class="app" id="app" style="display:none">
+<aside class="side"><div class="brand">Picsart Content Automation</div><nav><a class="nav-link" href="#overview" data-p="overview">Overview</a><a class="nav-link" href="#trend-to-video" data-p="trend-to-video">Trend</a><a class="nav-link" href="#presets" data-p="presets">Presets</a><a class="nav-link" href="#paid-ads" data-p="paid-ads">Paid Ads</a><a class="nav-link" href="#evals" data-p="evals">Evals</a><a class="nav-link" href="#automation" data-p="automation">Automation</a></nav></aside>
+<main class="main"><h1>Picsart Content Automation</h1><section id="overview" class="page"><p class="lede">One hub for Picsart's content/video automation: every use case, the methods behind it, the curated winners + representatives (durable CDN links only), how we score, and what's running. Built 2026-06-11.</p>
+    <h2>How it works · the shared spine</h2>
+    <div class="flow"><div class="flow-cap"><b>The whole system at a glance</b><span>3 use cases · one shared engine · one approval path</span></div><svg viewBox="0 0 1012 356" width="100%" style="max-width:1012px" role="img" aria-label="Merged content automation system"><defs><marker id="m_tv" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#7b2ff7"/></marker><marker id="m_ads" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#2563eb"/></marker><marker id="m_pre" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#0d9488"/></marker><marker id="m_rg" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#b8860b"/></marker></defs><path d="M160,50 C204,50 256,110 300,110" fill="none" stroke="#7b2ff7" stroke-width="1.8" opacity="0.85" marker-end="url(#m_tv)"/><path d="M160,165 C204,165 256,165 300,165" fill="none" stroke="#0d9488" stroke-width="1.8" opacity="0.85" marker-end="url(#m_pre)"/><path d="M160,280 C204,280 256,220 300,220" fill="none" stroke="#2563eb" stroke-width="1.8" opacity="0.85" marker-end="url(#m_ads)"/><path d="M468,110 C512,110 516,50 560,50" fill="none" stroke="#7b2ff7" stroke-width="1.8" opacity="0.85" marker-end="url(#m_tv)"/><path d="M728,50 C772,50 808,140 852,140" fill="none" stroke="#7b2ff7" stroke-width="1.8" opacity="0.85" marker-end="url(#m_tv)"/><path d="M468,165 C512,165 516,165 560,165" fill="none" stroke="#0d9488" stroke-width="1.8" opacity="0.85" marker-end="url(#m_pre)"/><path d="M728,165 C772,165 808,165 852,165" fill="none" stroke="#0d9488" stroke-width="1.8" opacity="0.85" marker-end="url(#m_pre)"/><path d="M468,220 C512,220 516,280 560,280" fill="none" stroke="#2563eb" stroke-width="1.8" opacity="0.85" marker-end="url(#m_ads)"/><path d="M728,280 C772,280 808,190 852,190" fill="none" stroke="#2563eb" stroke-width="1.8" opacity="0.85" marker-end="url(#m_ads)"/><rect x="8" y="18" width="152" height="64" rx="11" fill="#fff" stroke="#e6e8eb"/><rect x="8" y="18" width="4" height="64" rx="2" fill="#7b2ff7"/><text x="23" y="42" font-size="12.5" font-weight="700" fill="#7b2ff7">Trend → Video</text><text x="23" y="58" font-size="10" fill="#6b7280">you paste a link</text><rect x="8" y="133" width="152" height="64" rx="11" fill="#fff" stroke="#e6e8eb"/><rect x="8" y="133" width="4" height="64" rx="2" fill="#0d9488"/><text x="23" y="157" font-size="12.5" font-weight="700" fill="#0d9488">Presets</text><text x="23" y="173" font-size="10" fill="#6b7280">daily auto · Higgsfield</text><rect x="8" y="248" width="152" height="64" rx="11" fill="#fff" stroke="#e6e8eb"/><rect x="8" y="248" width="4" height="64" rx="2" fill="#2563eb"/><text x="23" y="272" font-size="12.5" font-weight="700" fill="#2563eb">Paid Ads</text><text x="23" y="288" font-size="10" fill="#6b7280">daily auto · <tspan fill="#c0392b" font-weight="700">paused</tspan></text><rect x="300" y="60" width="168" height="212" rx="11" fill="#fff" stroke="#e6e8eb"/><rect x="300" y="60" width="4" height="212" rx="2" fill="#15181d"/><text x="315" y="86" font-size="13.5" font-weight="700" fill="#15181d">Shared engine</text><text x="315" y="104" font-size="10" fill="#6b7280">Gemini analyzes the mechanic</text><text x="315" y="118" font-size="10" fill="#6b7280">NanoBanana still → Veo 3.1</text><text x="315" y="132" font-size="10" fill="#6b7280">3 takes per scene + vote</text><text x="315" y="146" font-size="10" fill="#6b7280">Lyria music</text><rect x="560" y="18" width="168" height="64" rx="11" fill="#fff" stroke="#e6e8eb"/><rect x="560" y="18" width="4" height="64" rx="2" fill="#7b2ff7"/><text x="575" y="42" font-size="12.5" font-weight="700" fill="#7b2ff7">Cinematic eval</text><text x="575" y="58" font-size="10" fill="#6b7280">fidelity · WIN ≥9</text><rect x="560" y="133" width="168" height="64" rx="11" fill="#fff" stroke="#e6e8eb"/><rect x="560" y="133" width="4" height="64" rx="2" fill="#0d9488"/><text x="575" y="157" font-size="12.5" font-weight="700" fill="#0d9488">Preset gate</text><text x="575" y="173" font-size="10" fill="#6b7280">≥8 + human OK</text><rect x="560" y="248" width="168" height="64" rx="11" fill="#fff" stroke="#e6e8eb"/><rect x="560" y="248" width="4" height="64" rx="2" fill="#2563eb"/><text x="575" y="272" font-size="12.5" font-weight="700" fill="#2563eb">Ad-craft eval</text><text x="575" y="288" font-size="10" fill="#6b7280">selling · WIN ≥8.5</text><rect x="852" y="105" width="152" height="120" rx="11" fill="#fff" stroke="#e6e8eb"/><rect x="852" y="105" width="4" height="120" rx="2" fill="#7b2ff7"/><text x="867" y="131" font-size="13.5" font-weight="700" fill="#7b2ff7">Deliver</text><text x="867" y="149" font-size="10" fill="#6b7280">Picsart CDN</text><text x="867" y="163" font-size="10" fill="#6b7280">Slack channel</text><text x="867" y="177" font-size="10" fill="#6b7280">🎬 owner approves</text><path d="M644,312 C644,344 384,344 384,274" fill="none" stroke="#b8860b" stroke-width="1.8" stroke-dasharray="5,4" marker-end="url(#m_rg)"/><text x="514" y="340" text-anchor="middle" font-size="10.5" font-weight="600" fill="#b8860b">REGEN — only what scored low</text></svg></div>
+    <p class="note" style="margin-bottom:6px">Every use case runs this spine: read the mechanic, generate, score, deliver to Slack for approval. Each one tailors it (different trigger and scoring) — open a use-case page to see its exact workflow.</p>
+    <div class="stats">
+      <div class="stat"><b>52</b><span>assets w/ live CDN links</span></div>
+      <div class="stat"><b>6</b><span>eval methods</span></div>
+      <div class="stat"><b>2</b><span>automations live</span></div>
+      <div class="stat"><b>9.7</b><span>top eval score</span></div>
+    </div>
+    <h2>Use cases</h2><div class="ov-grid"><a class="ov-card" href="#trend-to-video"><h3>Manual Trend→Video</h3><p>Paste a trending video and we rebuild it as a Picsart-branded version. We read the video&#x27;s mechanic (how the trend actually works), regenerate it scene by scene…</p><span class="ov-n">18 items</span></a><a class="ov-card" href="#presets"><h3>Presets</h3><p>We turn winning AI-video looks into one-tap Picsart presets. We mine standout aesthetics from competitors (Higgsfield, Meta Ads Library) and our own winners, th…</p><span class="ov-n">16 items</span></a><a class="ov-card" href="#paid-ads"><h3>Paid Ads (Meta)</h3><p>An automated factory that ships 4 Picsart ads a day. Lane A re-creates our top Meta ads; Lane B invents fresh concepts around one feature. Each ad is generated …</p><span class="ov-n">14 items</span></a></div></section><section id="trend-to-video" class="page"><p class="lede">Paste a trending video and we rebuild it as a Picsart-branded version. We read the video&#x27;s mechanic (how the trend actually works), regenerate it scene by scene, score it against the original, and hand off finished cuts. Best method today: 8.7/10.</p><h2>How it really works</h2><div class="flow"><div class="flow-cap"><b>Manual Trend → Video</b><span>trigger: you paste a reference link</span></div><svg viewBox="0 0 1012 234" width="100%" style="max-width:1012px" role="img" aria-label="Manual Trend → Video pipeline">
+      <defs>
+        <marker id="ah" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#7b2ff7"/></marker>
+        <marker id="ahb" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#b8860b"/></marker>
+      </defs><rect x="12" y="70" width="128" height="96" rx="12" fill="#fff" stroke="#e6e8eb"/><circle cx="34" cy="92" r="11" fill="#7b2ff7"/><text x="34" y="96" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">1</text><text x="52" y="97" font-size="13.5" font-weight="700" fill="#15181d">Source</text><text x="28" y="118" font-size="10" fill="#6b7280">yt-dlp the clip</text><rect x="184" y="70" width="128" height="96" rx="12" fill="#fff" stroke="#e6e8eb"/><circle cx="206" cy="92" r="11" fill="#7b2ff7"/><text x="206" y="96" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">2</text><text x="224" y="97" font-size="13.5" font-weight="700" fill="#15181d">Analyze</text><text x="200" y="118" font-size="10" fill="#6b7280">Gemini 2.5 Pro</text><text x="200" y="132" font-size="10" fill="#6b7280">mechanic → ~6 scenes</text><rect x="356" y="70" width="128" height="96" rx="12" fill="#fff" stroke="#e6e8eb"/><circle cx="378" cy="92" r="11" fill="#7b2ff7"/><text x="378" y="96" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">3</text><text x="396" y="97" font-size="13.5" font-weight="700" fill="#15181d">Generate</text><text x="372" y="118" font-size="10" fill="#6b7280">NanoBanana stills</text><text x="372" y="132" font-size="10" fill="#6b7280">Veo 3.1 ·3 per scene</text><text x="372" y="146" font-size="10" fill="#6b7280">Gemini votes best</text><rect x="528" y="70" width="128" height="96" rx="12" fill="#fff" stroke="#e6e8eb"/><circle cx="550" cy="92" r="11" fill="#7b2ff7"/><text x="550" y="96" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">4</text><text x="568" y="97" font-size="13.5" font-weight="700" fill="#15181d">Compose</text><text x="544" y="118" font-size="10" fill="#6b7280">captions + ffmpeg</text><text x="544" y="132" font-size="10" fill="#6b7280">Lyria music</text><rect x="700" y="70" width="128" height="96" rx="12" fill="#fff" stroke="#e6e8eb"/><circle cx="722" cy="92" r="11" fill="#7b2ff7"/><text x="722" y="96" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">5</text><text x="740" y="97" font-size="13.5" font-weight="700" fill="#15181d">Gate</text><text x="716" y="118" font-size="10" fill="#6b7280">text + cinematic eval</text><text x="716" y="132" font-size="10" fill="#6b7280">WIN ≥9 · OK ≥7</text><rect x="872" y="70" width="128" height="96" rx="12" fill="#fff" stroke="#e6e8eb"/><circle cx="894" cy="92" r="11" fill="#7b2ff7"/><text x="894" y="96" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">6</text><text x="912" y="97" font-size="13.5" font-weight="700" fill="#15181d">Deliver</text><text x="888" y="118" font-size="10" fill="#6b7280">Picsart CDN</text><text x="888" y="132" font-size="10" fill="#6b7280">Slack channel</text><line x1="142" y1="118" x2="178" y2="118" stroke="#7b2ff7" stroke-width="2" marker-end="url(#ah)"/><line x1="314" y1="118" x2="350" y2="118" stroke="#7b2ff7" stroke-width="2" marker-end="url(#ah)"/><line x1="486" y1="118" x2="522" y2="118" stroke="#7b2ff7" stroke-width="2" marker-end="url(#ah)"/><line x1="658" y1="118" x2="694" y2="118" stroke="#7b2ff7" stroke-width="2" marker-end="url(#ah)"/><line x1="830" y1="118" x2="866" y2="118" stroke="#7b2ff7" stroke-width="2" marker-end="url(#ah)"/><path d="M764,166 C764,224 420,224 420,170" fill="none" stroke="#b8860b" stroke-width="2" stroke-dasharray="5,4" marker-end="url(#ahb)"/><text x="592" y="222" text-anchor="middle" font-size="10.5" font-weight="600" fill="#b8860b">REGEN per-scene (only low scenes)</text>
+    </svg></div><h2>Methods</h2><div class="method">
+      <div class="method-h"><h3>Multi-scene cinematic</h3><span class="chip score s-ok"><b>8.7</b></span></div>
+      <div class="method-cols">
+        <div><h5>Steps</h5><ol><li>Break the trend into ~6 scenes (Gemini reads the mechanic)</li><li>Generate 3 video takes per scene with Veo 3.1, let Gemini pick the best</li><li>Stitch scenes, add captions and Lyria music, score against the original</li></ol></div>
+        <div><h5>Learnings</h5><ul><li>Our highest-quality method (8.7). About $8 and ~10 min per video.</li><li>Generating 3 takes per scene and voting is what beats a single take.</li></ul></div>
+      </div>
+      <div class="refs"><code>v15_pipeline.py</code></div>
+    </div><div class="method">
+      <div class="method-h"><h3>Single-shot cinematic</h3><span class="chip score s-ok"><b>8.45</b></span></div>
+      <div class="method-cols">
+        <div><h5>Steps</h5><ol><li>Use the reference clip as a motion guide for one continuous shot (Veo 3.1)</li><li>Generate and grade in one pass, no scene-splitting</li></ol></div>
+        <div><h5>Learnings</h5><ul><li>Faster and cheaper than multi-scene, slightly lower ceiling (8.45).</li><li>Best when the trend is one continuous move, not a montage.</li></ul></div>
+      </div>
+      <div class="refs"><code>v15_single_shot.py</code></div>
+    </div><div class="method">
+      <div class="method-h"><h3>Auto trend-replicator (any link in one command)</h3></div>
+      <div class="method-cols">
+        <div><h5>Steps</h5><ol><li>Turn any pasted link into a shot-and-transition plan</li><li>Generate the stills, assemble an organic cut, save it as a reusable template</li><li>On your approval, add the endcard and music for the ad cut</li></ol></div>
+        <div><h5>Learnings</h5><ul><li>Packages the winning methods so a new trend is a single command.</li><li>Saved templates (e.g. life-paths morph, food-reveal match-cut) are reusable mechanics.</li></ul></div>
+      </div>
+      <div class="refs"><code>trend_replicator.py</code></div>
+    </div><h2>Outputs</h2><div class="grid"><div class="card">
+      <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/284d5ea4-683e-4f07-9231-bd19f24c8afc.mp4" controls preload="metadata" playsinline></video>
+      <div class="card-b">
+        <div class="card-h"><h4>Luxury Escape Dreamscape (6-scene cinematic)</h4></div>
+        <div class="chips"><span class="chip score s-ok"><b>8.7</b></span><span class="chip model"><b>Nano Banana Pro + Veo 3.1 Fast + Lyria 3</b></span><span class="chip cost">$<b>11</b></span><span class="chip date"><b>2026-05-22</b></span></div>
+        <p class="note">Highest-scoring run ever; v15 multi-sample voting canonical winner</p>
+      </div>
+    </div><div class="card">
+      <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/98eeda06-aa38-4a1d-b7bb-1865f9aaa4b7.mp4" controls preload="metadata" playsinline></video>
+      <div class="card-b">
+        <div class="card-h"><h4>Cinematic Imperial (single-shot, --video conditioned)</h4></div>
+        <div class="chips"><span class="chip score s-ok"><b>8.45</b></span><span class="chip model"><b>Veo 3.1 Fast (--video) + Lyria 3</b></span><span class="chip cost">$<b>3</b></span><span class="chip date"><b>2026-05-22</b></span></div>
+        <p class="note">v15 single-shot v3 winner; +0.5 lift from --video motion conditioning on AI source</p>
+      </div>
+    </div><div class="card">
+      <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/0259dcf9-8630-4e2c-86be-4f9d485dd900.mp4" controls preload="metadata" playsinline></video>
+      <div class="card-b">
+        <div class="card-h"><h4>Beers (surreal museum diorama, single-shot)</h4></div>
+        <div class="chips"><span class="chip score s-ok"><b>7.85</b></span><span class="chip model"><b>Nano Banana Pro + Veo 3.1 Fast + Lyria 3</b></span><span class="chip cost">$<b>3</b></span><span class="chip date"><b>2026-05-22</b></span></div>
+        <p class="note">Single-shot 16:9 surreal diorama; source preset surreal-museum-diorama.json</p>
+      </div>
+    </div><div class="card">
+      <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/377be835-ddfa-46dd-8014-99ddb9b3bac7.mp4" controls preload="metadata" playsinline></video>
+      <div class="card-b">
+        <div class="card-h"><h4>AI Glow Up (live portrait retouch)</h4></div>
+        <div class="chips"><span class="chip score s-win"><b>9.4</b></span><span class="chip model"><b>Nano Banana Pro + Veo 3.1 Fast</b></span><span class="chip date"><b>2026-06-04</b></span></div>
+        <p class="note">Lane B feature showcase WINNER; magenta light sweep glow-up reveal</p>
+      </div>
+    </div><div class="card">
+      <img class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/bda92984-b0ff-4c73-94c4-24034656fb99.jpg" loading="lazy" alt="AI Glow Up (hero still)">
+      <div class="card-b">
+        <div class="card-h"><h4>AI Glow Up (hero still)</h4></div>
+        <div class="chips"><span class="chip score s-win"><b>9.05</b></span><span class="chip model"><b>Nano Banana Pro</b></span><span class="chip date"><b>2026-06-04</b></span></div>
+        <p class="note">Photo-ad hero that fed the photo-to-video step</p>
+      </div>
+    </div><div class="card">
+      <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/2e3a2935-fad4-4f54-96ec-097b7f71ac1d.mp4" controls preload="metadata" playsinline></video>
+      <div class="card-b">
+        <div class="card-h"><h4>Evolution Flow (Meta top-ad clone variation)</h4></div>
+        <div class="chips"><span class="chip score s-win"><b>9.3</b></span><span class="chip model"><b>Veo 3.1 Fast</b></span><span class="chip date"><b>2026-06-04</b></span></div>
+        <p class="note">Lane A clone of a 9.85-CTR Meta ad; new face+env, same hook strategy, WINNER in 1 attempt</p>
+      </div>
+    </div><div class="card">
+      <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/c9ed1010-5603-461f-a7bc-81db78446a42.mp4" controls preload="metadata" playsinline></video>
+      <div class="card-b">
+        <div class="card-h"><h4>AI Jiggle Effect (still portrait dances)</h4></div>
+        <div class="chips"><span class="chip score s-win"><b>9.7</b></span><span class="chip model"><b>Veo 3.1 Fast (t2v)</b></span><span class="chip date"><b>2026-06-08</b></span></div>
+        <p class="note">Highest automation-lane score; jiggle/dance feature showcase</p>
+      </div>
+    </div><div class="card">
+      <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/7ffbb6b5-1883-44f8-9b43-456d4d8fcb63.mp4" controls preload="metadata" playsinline></video>
+      <div class="card-b">
+        <div class="card-h"><h4>AI Product Shot (studio shot from phone snap)</h4></div>
+        <div class="chips"><span class="chip score s-win"><b>9.6</b></span><span class="chip model"><b>Nano Banana Pro + Veo 3.1 Fast</b></span><span class="chip date"><b>2026-06-10</b></span></div>
+        <p class="note">Product photography feature; vase studio-transform reveal, WINNER</p>
+      </div>
+    </div><div class="card">
+      <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/eaf2930d-f188-4ac1-9875-f26e9061955f.mp4" controls preload="metadata" playsinline></video>
+      <div class="card-b">
+        <div class="card-h"><h4>AI Remove People (empty the platform)</h4></div>
+        <div class="chips"><span class="chip score s-win"><b>9.1</b></span><span class="chip model"><b>Nano Banana Pro + Veo 3.1 Fast</b></span><span class="chip date"><b>2026-06-11</b></span></div>
+        <p class="note">Latest run (2026-06-11); subway crowd-erase reveal, WINNER in 1 attempt</p>
+      </div>
+    </div><div class="card">
+      <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/c6cef4cb-419c-4565-ab3f-8461abe82e3f.mp4" controls preload="metadata" playsinline></video>
+      <div class="card-b">
+        <div class="card-h"><h4>AI Background Replace (bland to pro)</h4></div>
+        <div class="chips"><span class="chip score s-ok"><b>8.7</b></span><span class="chip model"><b>Nano Banana Pro + Veo 3.1 Fast</b></span><span class="chip date"><b>2026-06-06</b></span></div>
+        <p class="note">Background-swap feature showcase; magenta vertical wipe reveal</p>
+      </div>
+    </div><div class="card">
+      <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/3c564e72-2d50-493f-af27-269698bddc42.mp4" controls preload="metadata" playsinline></video>
+      <div class="card-b">
+        <div class="card-h"><h4>AI Filter Avatar (Meta clone, cinematic)</h4></div>
+        <div class="chips"><span class="chip score s-ok"><b>8.9</b></span><span class="chip model"><b>Veo 3.1 Fast</b></span><span class="chip date"><b>2026-06-06</b></span></div>
+        <p class="note">Lane A clone of a 5.9-CTR Meta avatar-filter ad</p>
+      </div>
+    </div><div class="card">
+      <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/4bfe224e-e5f0-46d7-b786-8f6c3fdd4059.mp4" controls preload="metadata" playsinline></video>
+      <div class="card-b">
+        <div class="card-h"><h4>Gym Aura (Meta clone, persona)</h4></div>
+        <div class="chips"><span class="chip score s-ok"><b>8.1</b></span><span class="chip model"><b>Veo 3.1 Fast</b></span><span class="chip date"><b>2026-06-04</b></span></div>
+        <p class="note">Lane A clone of a gym physique ad; dream-body hook</p>
+      </div>
+    </div><div class="card">
+      <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/c566c726-250e-41e7-b5db-f9be67dd352f.mp4" controls preload="metadata" playsinline></video>
+      <div class="card-b">
+        <div class="card-h"><h4>Meta variation persona (v17 final cut)</h4></div>
+        <div class="chips"><span class="chip model"><b>Veo 3.1 Fast + Lyria 3</b></span><span class="chip date"><b>2026-06-08</b></span></div>
+        <p class="note">Representative v17 meta-variation final with endcard + watermark</p>
+      </div>
+    </div><div class="card">
+      <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/d88b520f-a64d-452d-92a3-39d851c1d7fe.mp4" controls preload="metadata" playsinline></video>
+      <div class="card-b">
+        <div class="card-h"><h4>AI Expand (text-to-video cinematic)</h4></div>
+        <div class="chips"><span class="chip score s-ok"><b>7.9</b></span><span class="chip model"><b>Veo 3.1 Fast (t2v) + Lyria 3</b></span><span class="chip date"><b>2026-06-07</b></span></div>
+        <p class="note">Cliff-edge frame-expand reveal; representative t2v path output</p>
+      </div>
+    </div><div class="card">
+      <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/58031c92-62f6-41c2-9428-224ea24f5c55.mp4" controls preload="metadata" playsinline></video>
+      <div class="card-b">
+        <div class="card-h"><h4>Zodiac Aesthetic Collage (ad cut)</h4></div>
+        <div class="chips"><span class="chip score s-win"><b>84</b></span><span class="chip model"><b>Nano Banana Pro + ffmpeg sequence</b></span><span class="chip date"><b>2026-06-09</b></span></div>
+        <p class="note">trend_replicator template output; score is trend-scoring total_100 (not the 1-10 eval)</p>
+      </div>
+    </div><div class="card">
+      <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/03487bc4-3880-4523-9d59-4a5bf80f119f.mp4" controls preload="metadata" playsinline></video>
+      <div class="card-b">
+        <div class="card-h"><h4>Zodiac Aesthetic Collage (organic cut)</h4></div>
+        <div class="chips"><span class="chip model"><b>Nano Banana Pro + ffmpeg sequence</b></span><span class="chip date"><b>2026-06-09</b></span></div>
+        <p class="note">Organic (no-endcard) cut from the trend_replicator template flow</p>
+      </div>
+    </div><div class="card">
+      <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/1fa148e2-56a0-4521-944b-378daa60c64f.mp4" controls preload="metadata" playsinline></video>
+      <div class="card-b">
+        <div class="card-h"><h4>Plan Life Paths (morph-sequence trend)</h4></div>
+        <div class="chips"><span class="chip model"><b>Nano Banana Pro + ffmpeg minterpolate morph</b></span><span class="chip date"><b>2026-06-05</b></span></div>
+        <p class="note">Hand-built morph-transition template (Plan A→E) with EN endcard</p>
+      </div>
+    </div><div class="card">
+      <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/8052c77c-825f-4110-9190-a59a550840ed.mp4" controls preload="metadata" playsinline></video>
+      <div class="card-b">
+        <div class="card-h"><h4>Magic Food Reveal (clap match-cut trend)</h4></div>
+        <div class="chips"><span class="chip model"><b>Nano Banana Pro + ffmpeg flash match-cut</b></span><span class="chip date"><b>2026-06-09</b></span></div>
+        <p class="note">Hand-built clap-then-flash reveal template; ad cut with endcard</p>
+      </div>
+    </div></div></section><section id="presets" class="page"><p class="lede">We turn winning AI-video looks into one-tap Picsart presets. We mine standout aesthetics from competitors (Higgsfield, Meta Ads Library) and our own winners, then package each as a photo-to-video preset a user runs with one image. The lesson that reshaped this: a preset must look like the user&#x27;s world (photoreal), not like a Picsart ad.</p><h2>How it really works</h2><div class="flow"><div class="flow-cap"><b>Presets · Higgsfield replication (daily auto)</b><span>trigger: runs daily · scrapes Higgsfield</span></div><svg viewBox="0 0 1012 234" width="100%" style="max-width:1012px" role="img" aria-label="Presets · Higgsfield replication (daily auto) pipeline">
+      <defs>
+        <marker id="ah" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#7b2ff7"/></marker>
+        <marker id="ahb" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#b8860b"/></marker>
+      </defs><rect x="12" y="70" width="128" height="96" rx="12" fill="#fff" stroke="#e6e8eb"/><circle cx="34" cy="92" r="11" fill="#7b2ff7"/><text x="34" y="96" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">1</text><text x="52" y="97" font-size="13.5" font-weight="700" fill="#15181d">Scrape</text><text x="28" y="118" font-size="10" fill="#6b7280">Higgsfield gallery</text><text x="28" y="132" font-size="10" fill="#6b7280">BrightData unlocker</text><rect x="184" y="70" width="128" height="96" rx="12" fill="#fff" stroke="#e6e8eb"/><circle cx="206" cy="92" r="11" fill="#7b2ff7"/><text x="206" y="96" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">2</text><text x="224" y="97" font-size="13.5" font-weight="700" fill="#15181d">Analyze</text><text x="200" y="118" font-size="10" fill="#6b7280">Gemini watches the</text><text x="200" y="132" font-size="10" fill="#6b7280">originals · top 2 viral</text><rect x="356" y="70" width="128" height="96" rx="12" fill="#fff" stroke="#e6e8eb"/><circle cx="378" cy="92" r="11" fill="#7b2ff7"/><text x="378" y="96" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">3</text><text x="396" y="97" font-size="13.5" font-weight="700" fill="#15181d">Decode</text><text x="372" y="118" font-size="10" fill="#6b7280">mechanic → spec</text><text x="372" y="132" font-size="10" fill="#6b7280">+ prompt pack</text><rect x="528" y="70" width="128" height="96" rx="12" fill="#fff" stroke="#e6e8eb"/><circle cx="550" cy="92" r="11" fill="#7b2ff7"/><text x="550" y="96" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">4</text><text x="568" y="97" font-size="13.5" font-weight="700" fill="#15181d">Generate</text><text x="544" y="118" font-size="10" fill="#6b7280">NanoBanana photo</text><text x="544" y="132" font-size="10" fill="#6b7280">Veo 3.1 voted</text><rect x="700" y="70" width="128" height="96" rx="12" fill="#fff" stroke="#e6e8eb"/><circle cx="722" cy="92" r="11" fill="#7b2ff7"/><text x="722" y="96" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">5</text><text x="740" y="97" font-size="13.5" font-weight="700" fill="#15181d">Gate</text><text x="716" y="118" font-size="10" fill="#6b7280">eval ≥8 + approve</text><text x="716" y="132" font-size="10" fill="#6b7280">never speculative</text><rect x="872" y="70" width="128" height="96" rx="12" fill="#fff" stroke="#e6e8eb"/><circle cx="894" cy="92" r="11" fill="#7b2ff7"/><text x="894" y="96" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">6</text><text x="912" y="97" font-size="13.5" font-weight="700" fill="#15181d">Deliver</text><text x="888" y="118" font-size="10" fill="#6b7280">Slack channel @Ruz @Irina</text><text x="888" y="132" font-size="10" fill="#6b7280">original + photo + video</text><line x1="142" y1="118" x2="178" y2="118" stroke="#7b2ff7" stroke-width="2" marker-end="url(#ah)"/><line x1="314" y1="118" x2="350" y2="118" stroke="#7b2ff7" stroke-width="2" marker-end="url(#ah)"/><line x1="486" y1="118" x2="522" y2="118" stroke="#7b2ff7" stroke-width="2" marker-end="url(#ah)"/><line x1="658" y1="118" x2="694" y2="118" stroke="#7b2ff7" stroke-width="2" marker-end="url(#ah)"/><line x1="830" y1="118" x2="866" y2="118" stroke="#7b2ff7" stroke-width="2" marker-end="url(#ah)"/><path d="M764,166 C764,224 592,224 592,170" fill="none" stroke="#b8860b" stroke-width="2" stroke-dasharray="5,4" marker-end="url(#ahb)"/><text x="678" y="222" text-anchor="middle" font-size="10.5" font-weight="600" fill="#b8860b">REGEN until bar met</text>
+    </svg></div><h2>Methods</h2><div class="method">
+      <div class="method-h"><h3>Preset building (winner → catalog)</h3><span class="chip score s-win"><b>9.7</b></span></div>
+      <div class="method-cols">
+        <div><h5>Steps</h5><ol><li>Define a winning look as a reusable preset spec</li><li>Generate a photoreal sample: still (NanoBanana) then motion (Veo 3.1)</li><li>Publish only after it scores ≥8 and a human approves</li></ol></div>
+        <div><h5>Learnings</h5><ul><li>v1 baked in Picsart magenta and read as &#x27;an ad&#x27; (scored 9.7 but wrong feel); v2 was rebuilt photoreal to a &#x27;Higgsfield bar&#x27;.</li><li>Never save a preset speculatively: a score plus human sign-off first.</li></ul></div>
+      </div>
+      <div class="refs"><code>_build_realistic_presets.py</code> <code>save_winner_preset.py</code></div>
+    </div><div class="method">
+      <div class="method-h"><h3>Higgsfield replication</h3></div>
+      <div class="method-cols">
+        <div><h5>Steps</h5><ol><li>Scrape a competitor&#x27;s standout preset clips</li><li>Rebuild the same mechanic and look inside Picsart</li></ol></div>
+        <div><h5>Learnings</h5><ul><li>Proof we can match the category leader&#x27;s quality bar.</li></ul></div>
+      </div>
+      <div class="refs"><code>_classify_meta.py</code></div>
+    </div><div class="method">
+      <div class="method-h"><h3>Persona grid (consistent character)</h3><span class="chip score s-low"><b>4.0</b></span></div>
+      <div class="method-cols">
+        <div><h5>Steps</h5><ol><li>Generate the same person across multiple scenes and poses</li><li>Merge into one multi-scene clip</li></ol></div>
+        <div><h5>Learnings</h5><ul><li>Character identity stays consistent (10/10) but art direction lagged (capped ~4/10).</li><li>Good for character consistency, not yet for mood and polish.</li></ul></div>
+      </div>
+      <div class="refs"><code>persona-grid</code></div>
+    </div><h2>Outputs</h2><h3 class="sg">Catalog presets</h3><div class="grid"><div class="card">
+      <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/0bba83ea-6ef7-468c-acfa-3808c6fc5ad5.mp4" controls preload="metadata" playsinline></video>
+      <div class="card-b">
+        <div class="card-h"><h4>Cinematic Jiggle (preset sample)</h4><span class="subtag">preset</span></div>
+        <div class="chips"><span class="chip score s-win"><b>9.7</b></span><span class="chip model"><b>Veo 3.1 Fast i2v + Lyria 3</b></span><span class="chip date"><b>2026-06-08</b></span></div>
+        <p class="note">Top winner of v1 branded drop. Magenta-lit studio freeze then jiggle dance. category social-virals.</p>
+      </div>
+    </div><div class="card">
+      <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/f7bda477-97a4-4822-98b1-ea028996de01.mp4" controls preload="metadata" playsinline></video>
+      <div class="card-b">
+        <div class="card-h"><h4>Studio Glow-Up (preset sample)</h4><span class="subtag">preset</span></div>
+        <div class="chips"><span class="chip score s-ok"><b>8.7</b></span><span class="chip model"><b>Veo 3.1 Fast i2v + Lyria 3</b></span><span class="chip date"><b>2026-06-08</b></span></div>
+        <p class="note">Magenta energy wipe swaps plain room for high-fashion studio. v1 branded set.</p>
+      </div>
+    </div><div class="card">
+      <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/54b900ca-8323-4cad-994a-d43c98f270ee.mp4" controls preload="metadata" playsinline></video>
+      <div class="card-b">
+        <div class="card-h"><h4>Epic Reveal (preset sample)</h4><span class="subtag">preset</span></div>
+        <div class="chips"><span class="chip score s-ok"><b>7.9</b></span><span class="chip model"><b>Veo 3.1 Fast i2v + Lyria 3</b></span><span class="chip date"><b>2026-06-08</b></span></div>
+        <p class="note">Dolly-zoom pull-back into epic magenta-sunset valley. v1 branded set.</p>
+      </div>
+    </div><div class="card">
+      <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/afb9f168-2dd7-4343-a287-4126faba8d66.mp4" controls preload="metadata" playsinline></video>
+      <div class="card-b">
+        <div class="card-h"><h4>Neon Noir (preset sample)</h4><span class="subtag">preset</span></div>
+        <div class="chips"><span class="chip score s-ok"><b>7.2</b></span><span class="chip model"><b>Veo 3.1 Fast i2v + Lyria 3</b></span><span class="chip date"><b>2026-06-08</b></span></div>
+        <p class="note">Background flashes into rain-soaked cyberpunk neon city. v1 branded set; this &#x27;too cinematic&#x27; read motivated the v2 photoreal rebuild.</p>
+      </div>
+    </div><div class="card">
+      <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/effd5e2b-cead-48f7-aab7-74900a27220c.mp4" controls preload="metadata" playsinline></video>
+      <div class="card-b">
+        <div class="card-h"><h4>Paparazzi Exit (realistic preset sample)</h4><span class="subtag">preset</span></div>
+        <div class="chips"><span class="chip model"><b>Nano Banana Pro hero -&amp;gt; Veo 3.1 Fast i2v + Lyria 3</b></span><span class="chip date"><b>2026-06-09</b></span></div>
+        <p class="note">v2 photoreal set (Higgsfield bar). Walk a wall of flashes to a waiting car. Durable cdnmf host.</p>
+      </div>
+    </div><div class="card">
+      <img class="media" src="https://cdn-pipeline-output.picsart.com/pipeline-output/4d42124b-9b2c-43c0-ae4e-bd07b75848ec.png" loading="lazy" alt="Paparazzi Exit (realistic preset hero still)">
+      <div class="card-b">
+        <div class="card-h"><h4>Paparazzi Exit (realistic preset hero still)</h4><span class="subtag">preset</span></div>
+        <div class="chips"><span class="chip model"><b>Nano Banana Pro (gemini-3-pro-image)</b></span><span class="chip date"><b>2026-06-09</b></span></div>
+        <p class="note">Hero seed for the realistic Paparazzi Exit preset. Durable cdn-pipeline-output host.</p>
+      </div>
+    </div><div class="card">
+      <video class="media" src="https://cdnmf.picsart.com/cloud-storage/19520b6f-745c-40ea-a06e-b3c11a76cdd9.mp4" controls preload="metadata" playsinline></video>
+      <div class="card-b">
+        <div class="card-h"><h4>Red Carpet Arrival (realistic preset sample)</h4><span class="subtag">preset</span></div>
+        <div class="chips"><span class="chip model"><b>Nano Banana Pro hero -&amp;gt; Veo 3.1 Fast i2v + Lyria 3</b></span><span class="chip date"><b>2026-06-09</b></span></div>
+        <p class="note">v2 photoreal set. Step onto the carpet, pause, pose. Durable cdnmf host.</p>
+      </div>
+    </div><div class="card">
+      <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/326cc485-39ce-4268-b78e-8cfe5e8fcfe4.mp4" controls preload="metadata" playsinline></video>
+      <div class="card-b">
+        <div class="card-h"><h4>Private Jet Departure (realistic preset sample)</h4><span class="subtag">preset</span></div>
+        <div class="chips"><span class="chip model"><b>Nano Banana Pro hero -&amp;gt; Veo 3.1 Fast i2v + Lyria 3</b></span><span class="chip date"><b>2026-06-09</b></span></div>
+        <p class="note">v2 photoreal set. Golden-hour tarmac, airstairs, glance back. Durable cdnmf host.</p>
+      </div>
+    </div></div><h3 class="sg">Higgsfield replication</h3><div class="grid"><div class="card">
+      <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/c1cc7495-15b8-4419-b886-95ad6d7193f0.mp4" controls preload="metadata" playsinline></video>
+      <div class="card-b">
+        <div class="card-h"><h4>Giantess on Stormy Beach (our replica)</h4><span class="subtag">higgsfield</span></div>
+        <div class="chips"><span class="chip model"><b>Kling v3 Pro i2v (seeded from original keyframe)</b></span><span class="chip date"><b>2026-06-04</b></span></div>
+        <p class="note">v3 pipeline replica of a Higgsfield preset. Gemini 2.5 Pro analysis on video + 4 keyframes -&gt; Kling v3 Pro i2v.</p>
+      </div>
+    </div><div class="card">
+      <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/442f6ac1-5b89-4552-9c82-04269017512a.mp4" controls preload="metadata" playsinline></video>
+      <div class="card-b">
+        <div class="card-h"><h4>Giantess on Stormy Beach (Higgsfield original reference)</h4><span class="subtag">higgsfield</span></div>
+        <div class="chips"><span class="chip model"><b>Higgsfield (scraped reference)</b></span><span class="chip date"><b>2026-06-04</b></span></div>
+        <p class="note">Scraped Higgsfield reference clip shown side-by-side with our replica.</p>
+      </div>
+    </div><div class="card">
+      <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/0fe41df6-247b-4b30-ba87-825229acf83b.mp4" controls preload="metadata" playsinline></video>
+      <div class="card-b">
+        <div class="card-h"><h4>Paparazzi Walk to Waiting Car (our replica)</h4><span class="subtag">higgsfield</span></div>
+        <div class="chips"><span class="chip model"><b>Nano Banana Pro hero -&amp;gt; Veo 3.1 Fast i2v</b></span><span class="chip date"><b>2026-06-04</b></span></div>
+        <p class="note">v2 pipeline replica. This preset later became the realistic &#x27;paparazzi-exit&#x27; catalog preset.</p>
+      </div>
+    </div><div class="card">
+      <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/e2faa895-7f36-4475-b849-c6897914fd4f.mp4" controls preload="metadata" playsinline></video>
+      <div class="card-b">
+        <div class="card-h"><h4>Paparazzi Walk to Waiting Car (Higgsfield original reference)</h4><span class="subtag">higgsfield</span></div>
+        <div class="chips"><span class="chip model"><b>Higgsfield (scraped reference)</b></span><span class="chip date"><b>2026-06-04</b></span></div>
+        <p class="note">Scraped Higgsfield reference clip for the paparazzi preset replication.</p>
+      </div>
+    </div></div><h3 class="sg">Persona grid</h3><div class="grid"><div class="card">
+      <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/1e2a9e29-497d-44fc-a0fe-0ccc0a332681.mp4" controls preload="metadata" playsinline></video>
+      <div class="card-b">
+        <div class="card-h"><h4>Stadium Candid persona-grid (merged ~15s)</h4><span class="subtag">persona-grid</span></div>
+        <div class="chips"><span class="chip score s-low"><b>4.0</b></span><span class="chip model"><b>Nano Banana Pro + FLUX Kontext Max + Kling v3 Pro i2v</b></span><span class="chip date"><b>2026-06-05</b></span></div>
+        <p class="note">Best persona-grid run. Consistency 10/10/10, motion 9, but overall 4 - reads staged vs the candid original. Winner source was 10/10 replicability.</p>
+      </div>
+    </div><div class="card">
+      <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/2791868b-9b7e-407b-bb8f-39e5d93d4057.mp4" controls preload="metadata" playsinline></video>
+      <div class="card-b">
+        <div class="card-h"><h4>Aquarium White persona-grid (merged ~15s)</h4><span class="subtag">persona-grid</span></div>
+        <div class="chips"><span class="chip score s-low"><b>4.0</b></span><span class="chip model"><b>Nano Banana Pro + FLUX Kontext Max + Kling v3 Pro i2v</b></span><span class="chip date"><b>2026-06-05</b></span></div>
+        <p class="note">Persona/env/register 10, motion 9, but overall 4 - missed the original&#x27;s moody blue-tinted art direction; biggest gap = art direction and mood.</p>
+      </div>
+    </div><div class="card">
+      <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/cde0bee1-dcd9-4a6e-91b2-8661d6d0fdb0.mp4" controls preload="metadata" playsinline></video>
+      <div class="card-b">
+        <div class="card-h"><h4>Stadium Candid persona-grid v1 (slideshow, failed)</h4><span class="subtag">persona-grid</span></div>
+        <div class="chips"><span class="chip model"><b>Nano Banana Pro stills (slideshow)</b></span><span class="chip date"><b>2026-06-04</b></span></div>
+        <p class="note">Earliest approach. Failed eval on every criterion (all N) - wrong medium (stills slideshow), drifting persona/environment. Motivated the per-scene i2v v2 rebuild.</p>
+      </div>
+    </div><div class="card">
+      <img class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/879cf3b2-eff7-4158-b784-6b917ad5973a.png" loading="lazy" alt="Stadium Candid persona reference (Nano Banana Pro)">
+      <div class="card-b">
+        <div class="card-h"><h4>Stadium Candid persona reference (Nano Banana Pro)</h4><span class="subtag">persona-grid</span></div>
+        <div class="chips"><span class="chip model"><b>Nano Banana Pro (gemini-3-pro-image)</b></span><span class="chip date"><b>2026-06-05</b></span></div>
+        <p class="note">Identity-anchor persona reference; FLUX Kontext Max then built an 8-angle character sheet from it.</p>
+      </div>
+    </div></div></section><section id="paid-ads" class="page"><p class="lede">An automated factory that ships 4 Picsart ads a day. Lane A re-creates our top Meta ads; Lane B invents fresh concepts around one feature. Each ad is generated (still, then motion, then music, then a localized endcard), auto-scored on ad-craft, and sent for one-tap approval. Best: 9.7/10.</p><h2>How it really works</h2><div class="flow"><div class="flow-cap"><b>Paid Ads · Meta</b><span>trigger: runs daily · 4 ads/day · automated</span></div><svg viewBox="0 0 1012 234" width="100%" style="max-width:1012px" role="img" aria-label="Paid Ads · Meta pipeline">
+      <defs>
+        <marker id="ah" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#7b2ff7"/></marker>
+        <marker id="ahb" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#b8860b"/></marker>
+      </defs><rect x="808" y="28" width="256" height="24" rx="12" fill="#f4eefe" stroke="#d9c6fb"/><text x="936" y="44" text-anchor="middle" font-size="11" fill="#7b2ff7">🎬 channel owner approves in Slack</text><line x1="936" y1="52" x2="936" y2="69" stroke="#d9c6fb" stroke-width="1.5" stroke-dasharray="3,3"/><rect x="12" y="70" width="128" height="96" rx="12" fill="#fff" stroke="#e6e8eb"/><circle cx="34" cy="92" r="11" fill="#7b2ff7"/><text x="34" y="96" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">1</text><text x="52" y="97" font-size="13.5" font-weight="700" fill="#15181d">Trigger</text><text x="28" y="118" font-size="10" fill="#6b7280">daily run</text><text x="28" y="132" font-size="10" fill="#6b7280">4 ads/day</text><rect x="184" y="70" width="128" height="96" rx="12" fill="#fff" stroke="#e6e8eb"/><circle cx="206" cy="92" r="11" fill="#7b2ff7"/><text x="206" y="96" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">2</text><text x="224" y="97" font-size="13.5" font-weight="700" fill="#15181d">Pick lane</text><text x="200" y="118" font-size="10" fill="#6b7280">A clone top Meta ad</text><text x="200" y="132" font-size="10" fill="#6b7280">B feature concept</text><rect x="356" y="70" width="128" height="96" rx="12" fill="#fff" stroke="#e6e8eb"/><circle cx="378" cy="92" r="11" fill="#7b2ff7"/><text x="378" y="96" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">3</text><text x="396" y="97" font-size="13.5" font-weight="700" fill="#15181d">Generate</text><text x="372" y="118" font-size="10" fill="#6b7280">NanoBanana hero</text><text x="372" y="132" font-size="10" fill="#6b7280">Veo 3.1 motion</text><text x="372" y="146" font-size="10" fill="#6b7280">Lyria music</text><rect x="528" y="70" width="128" height="96" rx="12" fill="#fff" stroke="#e6e8eb"/><circle cx="550" cy="92" r="11" fill="#7b2ff7"/><text x="550" y="96" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">4</text><text x="568" y="97" font-size="13.5" font-weight="700" fill="#15181d">Brand</text><text x="544" y="118" font-size="10" fill="#6b7280">intro/outro panels</text><text x="544" y="132" font-size="10" fill="#6b7280">localized endcard</text><rect x="700" y="70" width="128" height="96" rx="12" fill="#fff" stroke="#e6e8eb"/><circle cx="722" cy="92" r="11" fill="#7b2ff7"/><text x="722" y="96" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">5</text><text x="740" y="97" font-size="13.5" font-weight="700" fill="#15181d">Ad-eval</text><text x="716" y="118" font-size="10" fill="#6b7280">ad-craft scorecard</text><text x="716" y="132" font-size="10" fill="#6b7280">WIN ≥8.5</text><rect x="872" y="70" width="128" height="96" rx="12" fill="#fff" stroke="#e6e8eb"/><circle cx="894" cy="92" r="11" fill="#7b2ff7"/><text x="894" y="96" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">6</text><text x="912" y="97" font-size="13.5" font-weight="700" fill="#15181d">Deliver</text><text x="888" y="118" font-size="10" fill="#6b7280">Picsart CDN</text><text x="888" y="132" font-size="10" fill="#6b7280">Slack channel 🎬</text><line x1="142" y1="118" x2="178" y2="118" stroke="#7b2ff7" stroke-width="2" marker-end="url(#ah)"/><line x1="314" y1="118" x2="350" y2="118" stroke="#7b2ff7" stroke-width="2" marker-end="url(#ah)"/><line x1="486" y1="118" x2="522" y2="118" stroke="#7b2ff7" stroke-width="2" marker-end="url(#ah)"/><line x1="658" y1="118" x2="694" y2="118" stroke="#7b2ff7" stroke-width="2" marker-end="url(#ah)"/><line x1="830" y1="118" x2="866" y2="118" stroke="#7b2ff7" stroke-width="2" marker-end="url(#ah)"/><path d="M764,166 C764,224 420,224 420,170" fill="none" stroke="#b8860b" stroke-width="2" stroke-dasharray="5,4" marker-end="url(#ahb)"/><text x="592" y="222" text-anchor="middle" font-size="10.5" font-weight="600" fill="#b8860b">REGEN below 7.0</text>
+    </svg></div><h2>Methods</h2><div class="method">
+      <div class="method-h"><h3>Daily ad factory (4 a day, 2 lanes)</h3><span class="chip score s-win"><b>9.7</b></span></div>
+      <div class="method-cols">
+        <div><h5>Steps</h5><ol><li>Lane A clones a proven top Meta ad; Lane B builds a concept around one rotating feature</li><li>Generate hero still (NanoBanana) then motion (Veo 3.1) then music (Lyria), add a localized endcard</li><li>Auto-score on ad-craft and send the best to Slack DM for a 🎬 approval</li></ol></div>
+        <div><h5>Learnings</h5><ul><li>Fresh concepts (Lane B) consistently outscore replicas (Lane A).</li><li>Runs unattended every day; a human only taps approve before publish.</li></ul></div>
+      </div>
+      <div class="refs"><code>automation/daily_pipeline.py</code></div>
+    </div><div class="method">
+      <div class="method-h"><h3>Ad formats: photo vs video</h3><span class="chip score s-win"><b>9.7</b></span></div>
+      <div class="method-cols">
+        <div><h5>Steps</h5><ol><li>Photo ad: a single branded still with a CTA strip</li><li>Video ad: an 8s text-to-video cut with intro/outro panels and endcard</li></ol></div>
+        <div><h5>Learnings</h5><ul><li>Brand is enforced by our own panels and endcard, not by asking the model to render logos.</li><li>Both formats share the same ad-craft scorecard and approval gate.</li></ul></div>
+      </div>
+      <div class="refs"><code>v17_photo_ad.py</code> <code>v17_t2v_ad.py</code></div>
+    </div><div class="method">
+      <div class="method-h"><h3>Competitor scrape (Meta Ads Library)</h3></div>
+      <div class="method-cols">
+        <div><h5>Steps</h5><ol><li>Pull live competitor ads across 13 apps via BrightData</li><li>Classify them as a benchmark and an inspiration library for Lane A</li></ol></div>
+        <div><h5>Learnings</h5><ul><li>The generative pipeline can&#x27;t copy screen-recording or UI-demo ads (caps ~4-5/10).</li><li>Those ad types go to the Templates team instead.</li></ul></div>
+      </div>
+      <div class="refs"><code>meta-ads-reports/competitor-scrape</code></div>
+    </div><h2>Outputs</h2><h3 class="sg">Picsart ads</h3><div class="grid"><div class="card">
+      <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/60ae42f7-fb7e-48fa-b209-f1af2550c623.mp4" controls preload="metadata" playsinline></video>
+      <div class="card-b">
+        <div class="card-h"><h4>AI Jiggle Effect (Lane B)</h4><span class="subtag">ad</span></div>
+        <div class="chips"><span class="chip score s-win"><b>9.7</b></span><span class="chip model"><b>NanoBanana + Veo 3.1 + Lyria</b></span><span class="chip date"><b>2026-06-08</b></span></div>
+        <p class="note">Lane B concept · single-logo (fixed) · top Lane B score</p>
+      </div>
+    </div><div class="card">
+      <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/c9ed1010-5603-461f-a7bc-81db78446a42.mp4" controls preload="metadata" playsinline></video>
+      <div class="card-b">
+        <div class="card-h"><h4>AI Jiggle Effect — &quot;Make your photos dance.&quot;</h4><span class="subtag">ad</span></div>
+        <div class="chips"><span class="chip score s-win"><b>9.7</b></span><span class="chip model"><b>veo-3.1-fast</b></span><span class="chip date"><b>2026-06-08</b></span></div>
+        <p class="note">Top-scoring ad to date. Lane B persona, jiggle effect. WINNER.</p>
+      </div>
+    </div><div class="card">
+      <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/7ffbb6b5-1883-44f8-9b43-456d4d8fcb63.mp4" controls preload="metadata" playsinline></video>
+      <div class="card-b">
+        <div class="card-h"><h4>AI Product Shot — &quot;Instant studio shots.&quot;</h4><span class="subtag">ad</span></div>
+        <div class="chips"><span class="chip score s-win"><b>9.6</b></span><span class="chip model"><b>veo-3.1-fast</b></span><span class="chip date"><b>2026-06-10</b></span></div>
+        <p class="note">Lane B cinematic, product shot. WINNER. · single-logo (fixed)</p>
+      </div>
+    </div><div class="card">
+      <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/377be835-ddfa-46dd-8014-99ddb9b3bac7.mp4" controls preload="metadata" playsinline></video>
+      <div class="card-b">
+        <div class="card-h"><h4>AI Glow Up — &quot;Your AI glow up.&quot;</h4><span class="subtag">ad</span></div>
+        <div class="chips"><span class="chip score s-win"><b>9.4</b></span><span class="chip model"><b>veo-3.1-fast</b></span><span class="chip date"><b>2026-06-04</b></span></div>
+        <p class="note">Lane B persona, glow-up. WINNER. Photo intermediate scored 9.05.</p>
+      </div>
+    </div><div class="card">
+      <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/2e3a2935-fad4-4f54-96ec-097b7f71ac1d.mp4" controls preload="metadata" playsinline></video>
+      <div class="card-b">
+        <div class="card-h"><h4>Lane A persona replica — &quot;This footage seems impossible.&quot;</h4><span class="subtag">ad</span></div>
+        <div class="chips"><span class="chip score s-win"><b>9.3</b></span><span class="chip model"><b>veo-3.1-fast</b></span><span class="chip date"><b>2026-06-04</b></span></div>
+        <p class="note">Lane A replication of a top Picsart Meta ad. WINNER. Highest-scoring Lane A.</p>
+      </div>
+    </div><div class="card">
+      <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/eaf2930d-f188-4ac1-9875-f26e9061955f.mp4" controls preload="metadata" playsinline></video>
+      <div class="card-b">
+        <div class="card-h"><h4>AI Remove People — &quot;Erase the crowd.&quot;</h4><span class="subtag">ad</span></div>
+        <div class="chips"><span class="chip score s-win"><b>9.1</b></span><span class="chip model"><b>veo-3.1-fast</b></span><span class="chip date"><b>2026-06-11</b></span></div>
+        <p class="note">Most recent winner. Lane B cinematic. Photo intermediate scored 9.25. · single-logo (fixed)</p>
+      </div>
+    </div><div class="card">
+      <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/3c564e72-2d50-493f-af27-269698bddc42.mp4" controls preload="metadata" playsinline></video>
+      <div class="card-b">
+        <div class="card-h"><h4>Lane A cinematic replica — AI_Filter_Avatar_1</h4><span class="subtag">ad</span></div>
+        <div class="chips"><span class="chip score s-ok"><b>8.9</b></span><span class="chip model"><b>veo-3.1-fast</b></span><span class="chip date"><b>2026-06-06</b></span></div>
+        <p class="note">Lane A replication of Picsart AI Filter Avatar ad. WINNER.</p>
+      </div>
+    </div><div class="card">
+      <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/c6cef4cb-419c-4565-ab3f-8461abe82e3f.mp4" controls preload="metadata" playsinline></video>
+      <div class="card-b">
+        <div class="card-h"><h4>AI Background Replace — &quot;Go from bland to pro.&quot;</h4><span class="subtag">ad</span></div>
+        <div class="chips"><span class="chip score s-ok"><b>8.7</b></span><span class="chip model"><b>veo-3.1-fast</b></span><span class="chip date"><b>2026-06-06</b></span></div>
+        <p class="note">Lane B persona, background replace. WINNER.</p>
+      </div>
+    </div><div class="card">
+      <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/acdd017c-9df1-4ef6-b269-f8c9a012d7a6.mp4" controls preload="metadata" playsinline></video>
+      <div class="card-b">
+        <div class="card-h"><h4>Lane A cinematic replica — Gym_1</h4><span class="subtag">ad</span></div>
+        <div class="chips"><span class="chip score s-ok"><b>8.5</b></span><span class="chip model"><b>veo-3.1-fast</b></span><span class="chip date"><b>2026-06-05</b></span></div>
+        <p class="note">Lane A replication of Picsart Gym ad. WINNER.</p>
+      </div>
+    </div><div class="card">
+      <img class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/a428afba-5968-4a71-9b79-db8878e43d8a.jpg" loading="lazy" alt="AI Remove People — hero still (photo intermediate)">
+      <div class="card-b">
+        <div class="card-h"><h4>AI Remove People — hero still (photo intermediate)</h4><span class="subtag">ad</span></div>
+        <div class="chips"><span class="chip score s-win"><b>9.25</b></span><span class="chip model"><b>gemini-3-pro-image</b></span><span class="chip date"><b>2026-06-11</b></span></div>
+        <p class="note">Highest-scoring photo still. NanoBanana Pro hero + hook + endcard CTA strip.</p>
+      </div>
+    </div><div class="card">
+      <img class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/bda92984-b0ff-4c73-94c4-24034656fb99.jpg" loading="lazy" alt="AI Glow Up — hero still">
+      <div class="card-b">
+        <div class="card-h"><h4>AI Glow Up — hero still</h4><span class="subtag">ad</span></div>
+        <div class="chips"><span class="chip score s-win"><b>9.05</b></span><span class="chip model"><b>gemini-3-pro-image</b></span><span class="chip date"><b>2026-06-04</b></span></div>
+        <p class="note">Photo intermediate for the 9.4 glow-up video.</p>
+      </div>
+    </div><div class="card">
+      <img class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/a13ad29c-7efa-4537-85a6-39148e07f8ea.jpg" loading="lazy" alt="AI Enhance — &quot;Reveal the hidden detail.&quot; hero still">
+      <div class="card-b">
+        <div class="card-h"><h4>AI Enhance — &quot;Reveal the hidden detail.&quot; hero still</h4><span class="subtag">ad</span></div>
+        <div class="chips"><span class="chip score s-win"><b>9.2</b></span><span class="chip model"><b>gemini-3-pro-image</b></span><span class="chip date"><b>2026-06-05</b></span></div>
+        <p class="note">Strong still even where the video scored only ACCEPT (7.7).</p>
+      </div>
+    </div><div class="card">
+      <img class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/5b954f3e-6a8c-4cf6-95a0-cbffa02fcf4a.jpg" loading="lazy" alt="AI Style Transfer — &quot;See yourself as art.&quot; hero still">
+      <div class="card-b">
+        <div class="card-h"><h4>AI Style Transfer — &quot;See yourself as art.&quot; hero still</h4><span class="subtag">ad</span></div>
+        <div class="chips"><span class="chip score s-win"><b>9.1</b></span><span class="chip model"><b>gemini-3-pro-image</b></span><span class="chip date"><b>2026-06-07</b></span></div>
+        <p class="note">Photo still scored 9.1; video lane scored only 6.05 (REGEN) — illustrates the still &gt; motion gap.</p>
+      </div>
+    </div></div><h3 class="sg">Competitor scrape</h3><div class="grid"><div class="card">
+      <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/af7f8307-199d-420e-9c9c-644147fae215.mp4" controls preload="metadata" playsinline></video>
+      <div class="card-b">
+        <div class="card-h"><h4>Hailuo AI — Meta ad reference</h4><span class="subtag">competitor-scrape</span></div>
+        <div class="chips"><span class="chip date"><b>2026-06-04</b></span></div>
+        <p class="note">Downloaded &#x27;stadium candid&#x27; AI-video ad (&#x27;How does this look so real&#x27;), CTA &#x27;Download&#x27;. 60 videos captured. Local copy saved.</p>
+      </div>
+    </div></div><h3 class="sg">Localized endcards</h3><p class="note" style="margin:0 0 10px">Appended as the closing 3s of every video ad (cropped as a CTA strip on photo ads). Locale auto-selected from the detected ad language.</p><div class="grid"><div class="card"><img class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/9a2fa596-9f30-4659-ab7a-c6e4d62927d0.jpg" loading="lazy" alt="EN"><div class="card-b"><div class="card-h"><h4>EN</h4></div><p class="note">Default branded closing frame: &#x27;Download and try on Picsart&#x27; + &#x27;Trusted by 150M&#x27; + App Store/Play badges. Appended as 3s clip on videos (v17_t2v / trend_replicator --finalize) and the bottom ~28% is cropped as the CTA strip on photo ads.</p></div></div><div class="card"><img class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/7c2c1a35-d8c8-4d1b-bd1e-c95bb518b7ac.jpg" loading="lazy" alt="ES-MX"><div class="card-b"><div class="card-h"><h4>ES-MX</h4></div><p class="note">Spanish (Mexico) localized endcard, auto-selected when concept language_code resolves to &#x27;es&#x27;.</p></div></div><div class="card"><img class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/633cd54f-2cc0-4a27-ad66-8924774b7c7c.jpg" loading="lazy" alt="HI"><div class="card-b"><div class="card-h"><h4>HI</h4></div><p class="note">Hindi localized endcard, auto-selected when language_code resolves to &#x27;hi&#x27;.</p></div></div><div class="card"><img class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/0c63d9f1-c034-4a14-aec1-447eae6391f6.jpg" loading="lazy" alt="PT-BR"><div class="card-b"><div class="card-h"><h4>PT-BR</h4></div><p class="note">Portuguese (Brazil) localized endcard, auto-selected when language_code resolves to &#x27;pt&#x27;.</p></div></div></div></section><section id="evals" class="page"><p class="lede">Nothing ships without passing an automated quality score. Gemini watches the video and rates it; three methods cover cinematic trends, ads, and on-screen text. Because the AI judge is noisy (±0.5 per look), we generate several takes and vote, and ignore score gaps under 1 point.</p><h2>Eval methods</h2><div class="method"><div class="method-h"><h3>auto_eval.py (cinematic scorecard)</h3></div>
+      <p class="note"><b>Scores:</b> Final generated 6-scene compilation vs the original viral reference video. Used for cinematic / mood-reel / dreamscape replicas.</p>
+      <div class="method-cols"><div><h5>Dimensions</h5><ul><li>style_match (weight 0.35)</li><li>hero_visual_clarity (weight 0.25)</li><li>text_legibility (weight 0.15)</li><li>brand_safety (weight 0.25)</li></ul></div>
+      <div><h5>Learnings</h5><ul><li>LLM-judge noise is +/-0.5 per call on identical input. Don&#x27;t trust deltas &lt; 1.0.</li><li>A single weighted total hides single-scene text failures (v12 had broken text on scenes 1/3/5 but global text_legibility scored 10/10 because most scenes were fine) -- this is why text_eval.py exists as a separate gate.</li></ul></div></div>
+      <p class="note"><b>How:</b> Compares the finished video to the original on style, hero clarity, text and brand safety. ≥9 = winner, ≥7 = acceptable, else regenerate.</p>
+      <div class="refs"><code>trend-to-visual/auto_eval.py</code></div></div><div class="method"><div class="method-h"><h3>auto_eval_ad.py (ad-craft scorecard)</h3></div>
+      <p class="note"><b>Scores:</b> A Picsart vertical ad on performance-marketing ad-craft fundamentals. Does NOT penalize divergence from the reference -- an ad may diverge if it sells better.</p>
+      <div class="method-cols"><div><h5>Dimensions</h5><ul><li>hook_strength (weight 0.30)</li><li>message_clarity (weight 0.20)</li><li>brand_presence (weight 0.20)</li><li>cta_clarity (weight 0.15)</li><li>pacing_motion (weight 0.10)</li><li>brand_safety (weight 0.05)</li></ul></div>
+      <div><h5>Learnings</h5><ul><li>Screen-record and testimonial ad subtypes are unsolvable by Veo (can&#x27;t render UI or do lip-synced likeness) -- route to Templates team instead.</li><li>Brand presence is enforced structurally (PIL-rendered Picsart intro/outro panels + logo watermark) rather than asking Veo to render brand text.</li></ul></div></div>
+      <p class="note"><b>How:</b> Scores an ad on what makes ads work: hook, message, brand, CTA, pacing. ≥8.5 = winner. It rewards selling, not copying the reference.</p>
+      <div class="refs"><code>trend-to-visual/auto_eval_ad.py</code></div></div><div class="method"><div class="method-h"><h3>text_eval.py (per-scene text/glyph gate)</h3></div>
+      <p class="note"><b>Scores:</b> Per-scene first-frame text rendering: extracts a frame from each composed scene clip and validates the top-bar label against the EXPECTED string.</p>
+      <div class="method-cols"><div><h5>Dimensions</h5><ul><li>text_correct (matches expected string exactly)</li><li>text_legible (no broken glyphs / smudging)</li><li>text_centered (centered in top black bar)</li><li>text_isolated (no other text bleeding from generated video)</li><li>font_consistent (white Helvetica ~56pt)</li><li>overall (1-10)</li></ul></div>
+      <div><h5>Learnings</h5><ul><li>This is the safety net for the blind spot in auto_eval.py&#x27;s single weighted text score.</li><li>Auto-fix only possible when the raw clip (scene_N_raw.mp4) still exists.</li></ul></div></div>
+      <p class="note"><b>How:</b> Checks the on-screen caption on each scene is correct and clean; auto-fixes by re-rendering the text as an overlay.</p>
+      <div class="refs"><code>trend-to-visual/text_eval.py</code></div></div><div class="method"><div class="method-h"><h3>auto_regen_per_scene.py (eval-driven regen loop)</h3></div>
+      <p class="note"><b>Scores:</b> Not an eval itself -- consumes auto_eval.py&#x27;s per_scene array and regenerates ONLY scenes scoring below threshold, then re-evals.</p>
+      <div class="method-cols"><div><h5>Dimensions</h5><ul><li>reads per_scene total vs threshold (default 7.0)</li></ul></div>
+      <div><h5>Learnings</h5><ul><li>Fixes the global-broadcast regression where a single directive applied to all scenes regressed the good ones.</li><li>Multi-sample voting can&#x27;t fix capability gaps -- if Veo can&#x27;t render legible text, all 3 candidates fail and the vote picks the least-bad.</li></ul></div></div>
+      <p class="note"><b>How:</b> Regenerates only the scenes that scored low, keeps the good ones, then re-scores. Avoids breaking what already works.</p>
+      <div class="refs"><code>trend-to-visual/auto_regen_per_scene.py</code></div></div><div class="method"><div class="method-h"><h3>Multi-sample Gemini voting (in v15_pipeline.py / v15_single_shot.py)</h3></div>
+      <p class="note"><b>Scores:</b> Per-scene candidate selection: generates 3 Veo candidates per scene and has Gemini Vision vote for the best, to cancel LLM-judge noise.</p>
+      <div class="method-cols"><div><h5>Dimensions</h5><ul><li>Gemini picks best of N candidates per scene</li><li>per-scene retry with directive only if winner &lt; threshold</li></ul></div>
+      <div><h5>Learnings</h5><ul><li>Multi-sample voting is the primary mitigation for the +/-0.5 judge noise.</li><li>Cost ~$8 per 6-scene compilation (18 Veo Fast + 7 Gemini + 1 Lyria), ~10 min wall-clock.</li></ul></div></div>
+      <p class="note"><b>How:</b> Generates 3 takes per scene and votes for the best, which cancels the AI judge&#x27;s noise. This is what makes v15 our top scorer (8.7).</p>
+      <div class="refs"><code>trend-to-visual/v15_pipeline.py</code> <code>trend-to-visual/v15_single_shot.py</code></div></div><div class="method"><div class="method-h"><h3>preset_pipeline eval (replica vs original)</h3></div>
+      <p class="note"><b>Scores:</b> Our Higgsfield-preset replica scored AGAINST the original on 4 equal axes.</p>
+      <div class="method-cols"><div><h5>Dimensions</h5><ul><li>mechanic fidelity (same photo→video transform?)</li><li>message/virality (same hook/feeling?)</li><li>visual similarity (subject/setting/camera/lighting/grade)</li><li>photoreal craft (premium, no uncanny, brand-safe)</li></ul></div>
+      <div><h5>Learnings</h5><ul><li>The old standalone eval over-scored off-target replicas (a generic walk got 9.0 while missing the morph).</li><li>Multi-subject morphs are a capability gap a single i2v pass can&#x27;t clear — the eval flags this honestly.</li></ul></div></div>
+      <p class="note"><b>How:</b> Sends the original frame + our replica frame to Gemini Vision; returns a 1-10 score + a surgical regen_directive. Drives a regenerate-to-8.5 loop. Correctly refuses to pass a replica that misses the original&#x27;s mechanic (e.g. a plain walk vs a walk→car morph).</p>
+      <div class="refs"><code>automation/preset_pipeline.py</code></div></div>
+    <h2>Leaderboard</h2><table class="lb"><thead><tr><th>Run</th><th>Score</th><th>Pipeline</th><th>Use case</th><th>Date</th></tr></thead><tbody><tr><td><a href="https://cdn-editing-temp.picsart.com/editing-temp/60ae42f7-fb7e-48fa-b209-f1af2550c623.mp4" target="_blank">▶ laneB-persona-jiggle-effect (AI Jiggle Effect)</a></td><td class="num"><span class="chip score s-win"><b>9.7</b></span></td><td>daily_pipeline v17_t2v_ad</td><td>daily-ad-concept-gen</td><td>2026-06-08</td></tr><tr><td><a href="https://cdn-editing-temp.picsart.com/editing-temp/7ffbb6b5-1883-44f8-9b43-456d4d8fcb63.mp4" target="_blank">▶ laneB-cinematic-product-shot (AI Product Shot)</a></td><td class="num"><span class="chip score s-win"><b>9.6</b></span></td><td>daily_pipeline v17_t2v_ad</td><td>daily-ad-concept-gen</td><td>2026-06-10</td></tr><tr><td>manual-portrait-glow (AI Glow Up)</td><td class="num"><span class="chip score s-win"><b>9.4</b></span></td><td>daily_pipeline v17 persona</td><td>daily-ad-concept-gen</td><td>2026-06-04</td></tr><tr><td>manual-evolution-variation (Evolution Flow variation)</td><td class="num"><span class="chip score s-win"><b>9.3</b></span></td><td>daily_pipeline v17 persona Lane A</td><td>daily-ad-meta-replica</td><td>2026-06-04</td></tr><tr><td><a href="https://cdn-editing-temp.picsart.com/editing-temp/eaf2930d-f188-4ac1-9875-f26e9061955f.mp4" target="_blank">▶ laneB-cinematic-ai-remove-people (AI Remove People)</a></td><td class="num"><span class="chip score s-win"><b>9.1</b></span></td><td>daily_pipeline v17_t2v_ad</td><td>daily-ad-concept-gen</td><td>2026-06-11</td></tr><tr><td>laneA-cinematic AI_Filter_Avatar_1 replica</td><td class="num"><span class="chip score s-ok"><b>8.9</b></span></td><td>daily_pipeline v17 Lane A</td><td>daily-ad-meta-replica</td><td>2026-06-06</td></tr><tr><td>luxury-escape-dreamscape</td><td class="num"><span class="chip score s-ok"><b>8.7</b></span></td><td>v15 multi-sample voting</td><td>cinematic-trend-replica</td><td>2026-05-22</td></tr><tr><td>laneB-persona-bg-replace (AI Background Replace)</td><td class="num"><span class="chip score s-ok"><b>8.7</b></span></td><td>daily_pipeline v17_t2v_ad</td><td>daily-ad-concept-gen</td><td>2026-06-06</td></tr><tr><td>laneA-cinematic-2026-06-07 (AI_Filter_Avatar_1)</td><td class="num"><span class="chip score s-ok"><b>8.7</b></span></td><td>daily_pipeline v17 Lane A</td><td>daily-ad-meta-replica</td><td>2026-06-07</td></tr><tr><td>laneA-cinematic Gym_1 replica</td><td class="num"><span class="chip score s-ok"><b>8.5</b></span></td><td>daily_pipeline v17 Lane A</td><td>daily-ad-meta-replica</td><td>2026-06-05</td></tr><tr><td>cinematic-imperial-video-cond</td><td class="num"><span class="chip score s-ok"><b>8.45</b></span></td><td>v15 single-shot v3 (--video)</td><td>cinematic-trend-replica</td><td>2026-05-22</td></tr><tr><td>luxury-escape-dreamscape (v13a direct-frame)</td><td class="num"><span class="chip score s-ok"><b>8.35</b></span></td><td>v13A direct-frame (1 scene)</td><td>cinematic-trend-replica</td><td>2026-05-22</td></tr><tr><td>manual-evolution-variation gym-aura</td><td class="num"><span class="chip score s-ok"><b>8.1</b></span></td><td>daily_pipeline v17 persona Lane A</td><td>daily-ad-meta-replica</td><td>2026-06-04</td></tr><tr><td>cinematic-imperial-v2</td><td class="num"><span class="chip score s-ok"><b>8.1</b></span></td><td>v15 single-shot v2 (grand-scale)</td><td>cinematic-trend-replica</td><td>2026-05-22</td></tr><tr><td>cinematic-imperial</td><td class="num"><span class="chip score s-ok"><b>7.95</b></span></td><td>v15 single-shot v1</td><td>cinematic-trend-replica</td><td>2026-05-22</td></tr></tbody></table></section><section id="automation" class="page"><p class="lede">Two daily Slack automations plus on-demand trend replication. The Higgsfield preset-gen automation is the active daily one: it scrapes Higgsfield, has Gemini watch the real viral originals, replicates the best 2 as Picsart presets, and DMs them for approval. The morning ad factory is paused for now. Manual trend replication runs on demand. All deliver to your Slack DM.</p><div class="auto-item st-live">
+          <div class="auto-h"><span class="badge b-live">LIVE</span><h4>1 · Daily Higgsfield preset-gen → Slack</h4><span class="chip">daily 09:00 (plist inactive until activated)</span></div>
+          <p class="note">Scrapes Higgsfield (BrightData), Gemini Vision watches the actual originals and picks the top 2 viral, photoreal &#x27;user-world&#x27; effects, replicates each (NanoBanana photo → Veo 3.1 voted motion), evals ≥8, and DMs an approval card per preset: original Higgsfield reference + prompt pack + hero photo + final video. MESSAGE: &#x27;🎨 Preset candidate N for review&#x27;, owners @Ruz + @Irina, cc all channel owners, ✅/❌/🔄. First run validated (Living Portrait 9.8, CineGlow 9.3). Activate: launchctl load com.tik.preset-pipeline.plist.</p>
+          <div class="refs"><code>automation/preset_pipeline.py (plist com.tik.preset-pipeline)</code> <span class="kind">launchd</span></div>
+        </div><div class="auto-item st-live">
+          <div class="auto-h"><span class="badge b-live">LIVE</span><h4>3 · Manual trend replication → Slack hand-off</h4><span class="chip">on demand (you paste a link)</span></div>
+          <p class="note">You paste a trend link; trend_replicator decodes the mechanic, regenerates organic + ad cuts, uploads to CDN, and posts a &#x27;just recreated this trend&#x27; hand-off (different message from the approval cards).</p>
+          <div class="refs"><code>trend_replicator.py</code> <span class="kind">script</span></div>
+        </div><div class="auto-item st-paused">
+          <div class="auto-h"><span class="badge b-paused">PAUSED</span><h4>2 · Daily ad factory (Lane A/B) → Slack</h4><span class="chip">was daily 09:00</span></div>
+          <p class="note">PAUSED (launchctl unloaded) in favor of the preset automation. When live it generates 4 ads/day (Lane A clone top Meta ad · Lane B feature concept), auto-scores on ad-craft, and DMs an owner-tagged approval card. Now uses 3-candidate Veo voting + single centered logo. Re-enable: launchctl load com.tik.picsart-daily-ad.plist.</p>
+          <div class="refs"><code>automation/daily_pipeline.py (plist com.tik.picsart-daily-ad)</code> <span class="kind">launchd</span></div>
+        </div></section></main>
+</div><script>(function(){
+ function reveal(){var g=document.getElementById('gate');if(g)g.style.display='none';document.getElementById('app').style.display='flex';}
+ if(sessionStorage.getItem('cs_auth')==='1'){reveal();}
+ var f=document.getElementById('gform');
+ if(f)f.addEventListener('submit',function(e){e.preventDefault();
+  if(document.getElementById('u').value.trim().toLowerCase()==='picsart'&&document.getElementById('p').value==='content'){sessionStorage.setItem('cs_auth','1');reveal();}
+  else{document.getElementById('gerr').style.display='block';}});
+})();
+
+const pages=[...document.querySelectorAll('.page')];
+const links=[...document.querySelectorAll('.nav-link')];
+function go(){let id=(location.hash||'#overview').slice(1);
+ if(!document.getElementById(id))id='overview';
+ pages.forEach(p=>p.classList.toggle('active',p.id===id));
+ links.forEach(l=>l.classList.toggle('active',l.dataset.p===id));
+ document.querySelector('.main').scrollTo(0,0);window.scrollTo(0,0);}
+window.addEventListener('hashchange',go);go();
+</script></body></html>
