@@ -198,82 +198,77 @@ img.media{aspect-ratio:auto;max-height:520px;object-fit:contain}
         <div><h5>Learnings</h5><ul><li>Packages the winning methods so a new trend is a single command.</li><li>Saved templates (e.g. life-paths morph, food-reveal match-cut) are reusable mechanics.</li></ul></div>
       </div>
       <div class="refs"><code>trend_replicator.py</code></div>
-    </div></section><section id="presets" class="page"><h1>Preset Generation and Replication</h1><p class="lede">We turn winning AI-video looks into one-tap Picsart presets. We mine standout aesthetics from competitors (Higgsfield, Meta Ads Library) and our own winners, then package each as a photo-to-video preset a user runs with one image. The lesson that reshaped this: a preset must look like the user&#x27;s world (photoreal), not like a Picsart ad.</p><h2>How it really works</h2><div class="flow"><div class="flow-cap"><b>Presets · Higgsfield replication (daily auto)</b><span>trigger: runs daily · scrapes Higgsfield</span></div><svg viewBox="0 0 1012 244" width="100%" style="max-width:1012px" role="img" aria-label="Presets · Higgsfield replication (daily auto) pipeline">
-      <defs>
-        <marker id="ah" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#7b2ff7"/></marker>
-        <marker id="ahb" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#b8860b"/></marker>
-      </defs><rect x="12" y="70" width="128" height="106" rx="12" fill="#fff" stroke="#e6e8eb"/><circle cx="34" cy="92" r="11" fill="#7b2ff7"/><text x="34" y="96" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">1</text><text x="52" y="97" font-size="13.5" font-weight="700" fill="#15181d">Scrape</text><text x="28" y="116" font-size="10" fill="#6b7280">Higgsfield gallery</text><text x="28" y="129" font-size="10" fill="#6b7280">BrightData unlocker</text><rect x="184" y="70" width="128" height="106" rx="12" fill="#fff" stroke="#e6e8eb"/><circle cx="206" cy="92" r="11" fill="#7b2ff7"/><text x="206" y="96" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">2</text><text x="224" y="97" font-size="13.5" font-weight="700" fill="#15181d">Analyze</text><text x="200" y="116" font-size="10" fill="#6b7280">Gemini watches the</text><text x="200" y="129" font-size="10" fill="#6b7280">originals · top 2</text><text x="200" y="142" font-size="10" fill="#6b7280">viral</text><rect x="356" y="70" width="128" height="106" rx="12" fill="#fff" stroke="#e6e8eb"/><circle cx="378" cy="92" r="11" fill="#7b2ff7"/><text x="378" y="96" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">3</text><text x="396" y="97" font-size="13.5" font-weight="700" fill="#15181d">Decode</text><text x="372" y="116" font-size="10" fill="#6b7280">mechanic → spec</text><text x="372" y="129" font-size="10" fill="#6b7280">+ prompt pack</text><rect x="528" y="70" width="128" height="106" rx="12" fill="#fff" stroke="#e6e8eb"/><circle cx="550" cy="92" r="11" fill="#7b2ff7"/><text x="550" y="96" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">4</text><text x="568" y="97" font-size="13.5" font-weight="700" fill="#15181d">Generate</text><text x="544" y="116" font-size="10" fill="#6b7280">NanoBanana photo</text><text x="544" y="129" font-size="10" fill="#6b7280">Veo 3.1 voted</text><rect x="700" y="70" width="128" height="106" rx="12" fill="#fff" stroke="#e6e8eb"/><circle cx="722" cy="92" r="11" fill="#7b2ff7"/><text x="722" y="96" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">5</text><text x="740" y="97" font-size="13.5" font-weight="700" fill="#15181d">Gate</text><text x="716" y="116" font-size="10" fill="#6b7280">eval ≥8 + approve</text><text x="716" y="129" font-size="10" fill="#6b7280">never speculative</text><rect x="872" y="70" width="128" height="106" rx="12" fill="#fff" stroke="#e6e8eb"/><circle cx="894" cy="92" r="11" fill="#7b2ff7"/><text x="894" y="96" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">6</text><text x="912" y="97" font-size="13.5" font-weight="700" fill="#15181d">Deliver</text><text x="888" y="116" font-size="10" fill="#6b7280">#pa-trends @Ruz</text><text x="888" y="129" font-size="10" fill="#6b7280">@Irina</text><text x="888" y="142" font-size="10" fill="#6b7280">original + photo +</text><text x="888" y="155" font-size="10" fill="#6b7280">video</text><line x1="142" y1="123" x2="178" y2="123" stroke="#7b2ff7" stroke-width="2" marker-end="url(#ah)"/><line x1="314" y1="123" x2="350" y2="123" stroke="#7b2ff7" stroke-width="2" marker-end="url(#ah)"/><line x1="486" y1="123" x2="522" y2="123" stroke="#7b2ff7" stroke-width="2" marker-end="url(#ah)"/><line x1="658" y1="123" x2="694" y2="123" stroke="#7b2ff7" stroke-width="2" marker-end="url(#ah)"/><line x1="830" y1="123" x2="866" y2="123" stroke="#7b2ff7" stroke-width="2" marker-end="url(#ah)"/><path d="M764,176 C764,234 592,234 592,180" fill="none" stroke="#b8860b" stroke-width="2" stroke-dasharray="5,4" marker-end="url(#ahb)"/><text x="678" y="232" text-anchor="middle" font-size="10.5" font-weight="600" fill="#b8860b">REGEN until bar met</text>
-    </svg></div><h2>Outputs</h2><h3 class="sg">Concept Gen (preset-first)</h3><div class="grid"><div class="card">
+    </div></section><section id="presets" class="page"><h1>Preset Generation and Replication</h1><p class="lede">We turn winning AI-video looks into one-tap Picsart presets. We mine standout aesthetics from competitors (Higgsfield, Meta Ads Library) and our own winners, then package each as a photo-to-video preset a user runs with one image. The lesson that reshaped this: a preset must look like the user&#x27;s world (photoreal), not like a Picsart ad.</p><h2>How it really works</h2><div class="flow"><div class="flow-cap"><b>Two preset pipelines, one engine</b><span>Higgsfield replication + Concept Gen → preset gate → catalog</span></div><svg viewBox="0 0 1012 200" width="100%" style="max-width:1012px" role="img" aria-label="Merged preset pipelines"><defs><marker id="pmp" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#7b2ff7"/></marker><marker id="pmt" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#0d9488"/></marker><marker id="pmrg" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#b8860b"/></marker></defs><path d="M192,55 C232,55 218,82 258,82" fill="none" stroke="#0d9488" stroke-width="1.8" opacity=".85" marker-end="url(#pmt)"/><path d="M192,177 C232,177 218,104 258,104" fill="none" stroke="#7b2ff7" stroke-width="1.8" opacity=".85" marker-end="url(#pmp)"/><path d="M464,93 C504,93 490,93 530,93" fill="none" stroke="#7b2ff7" stroke-width="1.8" opacity=".85" marker-end="url(#pmp)"/><path d="M730,93 C770,93 752,93 792,93" fill="none" stroke="#7b2ff7" stroke-width="1.8" opacity=".85" marker-end="url(#pmp)"/><rect x="8" y="28" width="184" height="64" rx="11" fill="#fff" stroke="#e6e8eb"/><rect x="8" y="28" width="4" height="64" rx="2" fill="#0d9488"/><text x="23" y="51" font-size="12.5" font-weight="700" fill="#0d9488">Higgsfield scrape</text><text x="23" y="68" font-size="10" fill="#6b7280">pick a viral original</text><text x="23" y="81" font-size="10" fill="#6b7280">(BrightData)</text><rect x="8" y="150" width="184" height="64" rx="11" fill="#fff" stroke="#e6e8eb"/><rect x="8" y="150" width="4" height="64" rx="2" fill="#7b2ff7"/><text x="23" y="173" font-size="12.5" font-weight="700" fill="#7b2ff7">Concept Gen</text><text x="23" y="190" font-size="10" fill="#6b7280">pick a Picsart feature</text><text x="23" y="203" font-size="10" fill="#6b7280">(rotation)</text><rect x="258" y="46" width="206" height="81" rx="11" fill="#fff" stroke="#e6e8eb"/><rect x="258" y="46" width="4" height="81" rx="2" fill="#15181d"/><text x="273" y="71" font-size="13.5" font-weight="700" fill="#15181d">Shared engine</text><text x="273" y="88" font-size="10" fill="#6b7280">NanoBanana hero still</text><text x="273" y="101" font-size="10" fill="#6b7280">Veo 3.1 voted i2v</text><text x="273" y="114" font-size="10" fill="#6b7280">clean — no ad wrap</text><rect x="530" y="46" width="200" height="81" rx="11" fill="#fff" stroke="#e6e8eb"/><rect x="530" y="46" width="4" height="81" rx="2" fill="#15181d"/><text x="545" y="71" font-size="13.5" font-weight="700" fill="#15181d">Preset gate</text><text x="545" y="88" font-size="10" fill="#6b7280">Higgsfield: vs original</text><text x="545" y="101" font-size="10" fill="#6b7280">Concept Gen: preset rubric</text><text x="545" y="114" font-size="10" fill="#6b7280">score ≥ 8 + approve</text><rect x="792" y="58" width="212" height="68" rx="11" fill="#fff" stroke="#e6e8eb"/><rect x="792" y="58" width="4" height="68" rx="2" fill="#7b2ff7"/><text x="807" y="83" font-size="13.5" font-weight="700" fill="#7b2ff7">Deliver</text><text x="807" y="100" font-size="10" fill="#6b7280">Slack DM @Ruz @Irina</text><text x="807" y="113" font-size="10" fill="#6b7280">→ preset catalog</text><path d="M630,135 C630,180 360,180 360,137" fill="none" stroke="#b8860b" stroke-width="1.8" stroke-dasharray="5,4" marker-end="url(#pmrg)"/><text x="495" y="176" text-anchor="middle" font-size="10.5" font-weight="600" fill="#b8860b">REGEN to the bar</text></svg></div><h2>Outputs</h2><h3 class="sg">Concept Gen Presets</h3><div class="grid"><div class="card">
       <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/0d2cf6a9-1e59-4c97-ad29-e0dae56b5733.mp4" controls preload="metadata" playsinline></video>
       <div class="card-b">
-        <div class="card-h"><h4>AI Avatar (Concept Gen · clean preset)</h4><span class="subtag">concept-gen</span></div>
+        <div class="card-h"><h4>AI Avatar (Concept Gen · clean preset)</h4><span class="subtag">concept-gen-presets</span></div>
         <div class="chips"><span class="chip score s-win"><b>9.1</b></span><span class="chip model"><b>NanoBanana + Veo 3.1</b></span><span class="chip date"><b>2026-06-12</b></span></div>
         <p class="note">Concept Gen preset-first: clean motion, no hook/endcard/logo</p>
       </div>
     </div><div class="card">
       <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/a5021902-c6da-4567-87da-0ceaa854c6cb.mp4" controls preload="metadata" playsinline></video>
       <div class="card-b">
-        <div class="card-h"><h4>Director&#x27;s Cut (AI Enhance · cinematic)</h4><span class="subtag">concept-gen</span></div>
+        <div class="card-h"><h4>Director&#x27;s Cut (AI Enhance · cinematic)</h4><span class="subtag">concept-gen-presets</span></div>
         <div class="chips"><span class="chip score s-win"><b>9.6</b></span><span class="chip model"><b>NanoBanana + Veo 3.1</b></span><span class="chip date"><b>2026-06-12</b></span></div>
         <p class="note">Preset-first Concept Gen · daily automation output</p>
       </div>
-    </div></div><h3 class="sg">Preset building</h3><div class="grid"><div class="card">
+    </div><div class="card">
       <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/0bba83ea-6ef7-468c-acfa-3808c6fc5ad5.mp4" controls preload="metadata" playsinline></video>
       <div class="card-b">
-        <div class="card-h"><h4>Cinematic Jiggle (preset sample)</h4><span class="subtag">preset</span></div>
+        <div class="card-h"><h4>Cinematic Jiggle (preset sample)</h4><span class="subtag">concept-gen-presets</span></div>
         <div class="chips"><span class="chip score s-win"><b>9.7</b></span><span class="chip model"><b>Veo 3.1 Fast i2v + Lyria 3</b></span><span class="chip date"><b>2026-06-08</b></span></div>
         <p class="note">Top winner of v1 branded drop. Magenta-lit studio freeze then jiggle dance. category social-virals.</p>
       </div>
     </div><div class="card">
       <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/f7bda477-97a4-4822-98b1-ea028996de01.mp4" controls preload="metadata" playsinline></video>
       <div class="card-b">
-        <div class="card-h"><h4>Studio Glow-Up (preset sample)</h4><span class="subtag">preset</span></div>
+        <div class="card-h"><h4>Studio Glow-Up (preset sample)</h4><span class="subtag">concept-gen-presets</span></div>
         <div class="chips"><span class="chip score s-ok"><b>8.7</b></span><span class="chip model"><b>Veo 3.1 Fast i2v + Lyria 3</b></span><span class="chip date"><b>2026-06-08</b></span></div>
         <p class="note">Magenta energy wipe swaps plain room for high-fashion studio. v1 branded set.</p>
       </div>
     </div><div class="card">
       <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/54b900ca-8323-4cad-994a-d43c98f270ee.mp4" controls preload="metadata" playsinline></video>
       <div class="card-b">
-        <div class="card-h"><h4>Epic Reveal (preset sample)</h4><span class="subtag">preset</span></div>
+        <div class="card-h"><h4>Epic Reveal (preset sample)</h4><span class="subtag">concept-gen-presets</span></div>
         <div class="chips"><span class="chip score s-ok"><b>7.9</b></span><span class="chip model"><b>Veo 3.1 Fast i2v + Lyria 3</b></span><span class="chip date"><b>2026-06-08</b></span></div>
         <p class="note">Dolly-zoom pull-back into epic magenta-sunset valley. v1 branded set.</p>
       </div>
     </div><div class="card">
       <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/afb9f168-2dd7-4343-a287-4126faba8d66.mp4" controls preload="metadata" playsinline></video>
       <div class="card-b">
-        <div class="card-h"><h4>Neon Noir (preset sample)</h4><span class="subtag">preset</span></div>
+        <div class="card-h"><h4>Neon Noir (preset sample)</h4><span class="subtag">concept-gen-presets</span></div>
         <div class="chips"><span class="chip score s-ok"><b>7.2</b></span><span class="chip model"><b>Veo 3.1 Fast i2v + Lyria 3</b></span><span class="chip date"><b>2026-06-08</b></span></div>
         <p class="note">Background flashes into rain-soaked cyberpunk neon city. v1 branded set; this &#x27;too cinematic&#x27; read motivated the v2 photoreal rebuild.</p>
       </div>
     </div><div class="card">
       <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/effd5e2b-cead-48f7-aab7-74900a27220c.mp4" controls preload="metadata" playsinline></video>
       <div class="card-b">
-        <div class="card-h"><h4>Paparazzi Exit (realistic preset sample)</h4><span class="subtag">preset</span></div>
+        <div class="card-h"><h4>Paparazzi Exit (realistic preset sample)</h4><span class="subtag">concept-gen-presets</span></div>
         <div class="chips"><span class="chip model"><b>Nano Banana Pro hero -&amp;gt; Veo 3.1 Fast i2v + Lyria 3</b></span><span class="chip date"><b>2026-06-09</b></span></div>
         <p class="note">v2 photoreal set (Higgsfield bar). Walk a wall of flashes to a waiting car. Durable cdnmf host.</p>
       </div>
     </div><div class="card">
       <img class="media" src="https://cdn-pipeline-output.picsart.com/pipeline-output/4d42124b-9b2c-43c0-ae4e-bd07b75848ec.png" loading="lazy" alt="Paparazzi Exit (realistic preset hero still)">
       <div class="card-b">
-        <div class="card-h"><h4>Paparazzi Exit (realistic preset hero still)</h4><span class="subtag">preset</span></div>
+        <div class="card-h"><h4>Paparazzi Exit (realistic preset hero still)</h4><span class="subtag">concept-gen-presets</span></div>
         <div class="chips"><span class="chip model"><b>Nano Banana Pro (gemini-3-pro-image)</b></span><span class="chip date"><b>2026-06-09</b></span></div>
         <p class="note">Hero seed for the realistic Paparazzi Exit preset. Durable cdn-pipeline-output host.</p>
       </div>
-    </div><div class="card">
+    </div></div><div id="more2" class="grid" style="display:none;margin-top:16px"><div class="card">
       <video class="media" src="https://cdnmf.picsart.com/cloud-storage/19520b6f-745c-40ea-a06e-b3c11a76cdd9.mp4" controls preload="metadata" playsinline></video>
       <div class="card-b">
-        <div class="card-h"><h4>Red Carpet Arrival (realistic preset sample)</h4><span class="subtag">preset</span></div>
+        <div class="card-h"><h4>Red Carpet Arrival (realistic preset sample)</h4><span class="subtag">concept-gen-presets</span></div>
         <div class="chips"><span class="chip model"><b>Nano Banana Pro hero -&amp;gt; Veo 3.1 Fast i2v + Lyria 3</b></span><span class="chip date"><b>2026-06-09</b></span></div>
         <p class="note">v2 photoreal set. Step onto the carpet, pause, pose. Durable cdnmf host.</p>
       </div>
     </div><div class="card">
       <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/326cc485-39ce-4268-b78e-8cfe5e8fcfe4.mp4" controls preload="metadata" playsinline></video>
       <div class="card-b">
-        <div class="card-h"><h4>Private Jet Departure (realistic preset sample)</h4><span class="subtag">preset</span></div>
+        <div class="card-h"><h4>Private Jet Departure (realistic preset sample)</h4><span class="subtag">concept-gen-presets</span></div>
         <div class="chips"><span class="chip model"><b>Nano Banana Pro hero -&amp;gt; Veo 3.1 Fast i2v + Lyria 3</b></span><span class="chip date"><b>2026-06-09</b></span></div>
         <p class="note">v2 photoreal set. Golden-hour tarmac, airstairs, glance back. Durable cdnmf host.</p>
       </div>
-    </div></div><h3 class="sg">Higgsfield replication</h3><div class="grid"><div class="card">
+    </div></div><button class="morebtn" onclick="var e=document.getElementById('more2');var s=e.style.display=='none';e.style.display=s?'grid':'none';this.textContent=s?'Show less':'Expand more (2)'">Expand more (2)</button><h3 class="sg">Higgsfield replication</h3><div class="grid"><div class="card">
       <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/c1cc7495-15b8-4419-b886-95ad6d7193f0.mp4" controls preload="metadata" playsinline></video>
       <div class="card-b">
         <div class="card-h"><h4>Giantess on Stormy Beach (our replica)</h4><span class="subtag">higgsfield</span></div>
@@ -425,7 +420,7 @@ img.media{aspect-ratio:auto;max-height:520px;object-fit:contain}
         <div class="chips"><span class="chip score s-win"><b>9.3</b></span><span class="chip model"><b>veo-3.1-fast</b></span><span class="chip date"><b>2026-06-04</b></span></div>
         <p class="note">Meta Replica replication of a top Picsart Meta ad. WINNER. Highest-scoring Meta Replica.</p>
       </div>
-    </div></div><div id="more2" class="grid" style="display:none;margin-top:16px"><div class="card">
+    </div></div><div id="more3" class="grid" style="display:none;margin-top:16px"><div class="card">
       <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/eaf2930d-f188-4ac1-9875-f26e9061955f.mp4" controls preload="metadata" playsinline></video>
       <div class="card-b">
         <div class="card-h"><h4>AI Remove People — &quot;Erase the crowd.&quot;</h4><span class="subtag">ad</span></div>
@@ -481,7 +476,7 @@ img.media{aspect-ratio:auto;max-height:520px;object-fit:contain}
         <div class="chips"><span class="chip score s-win"><b>9.1</b></span><span class="chip model"><b>gemini-3-pro-image</b></span><span class="chip date"><b>2026-06-07</b></span></div>
         <p class="note">Photo still scored 9.1; video lane scored only 6.05 (REGEN) — illustrates the still &gt; motion gap.</p>
       </div>
-    </div></div><button class="morebtn" onclick="var e=document.getElementById('more2');var s=e.style.display=='none';e.style.display=s?'grid':'none';this.textContent=s?'Show less':'Expand more (8)'">Expand more (8)</button><h3 class="sg">Competitor research</h3><div class="grid"><div class="card">
+    </div></div><button class="morebtn" onclick="var e=document.getElementById('more3');var s=e.style.display=='none';e.style.display=s?'grid':'none';this.textContent=s?'Show less':'Expand more (8)'">Expand more (8)</button><h3 class="sg">Competitor research</h3><div class="grid"><div class="card">
       <video class="media" src="https://cdn-editing-temp.picsart.com/editing-temp/af7f8307-199d-420e-9c9c-644147fae215.mp4" controls preload="metadata" playsinline></video>
       <div class="card-b">
         <div class="card-h"><h4>Hailuo AI — Meta ad reference</h4><span class="subtag">competitor-scrape</span></div>
