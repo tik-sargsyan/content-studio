@@ -1,0 +1,38 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Preset Adoption Tracker</title><style>
+:root{--ink:#15181d;--mut:#6b7280;--line:#e6e8eb;--accent:#7b2ff7;--ok:#16a34a;--warn:#d97706}
+*{box-sizing:border-box}body{font:15px/1.55 -apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);background:#f7f8fa;margin:0;padding:32px 18px}
+.wrap{max-width:1000px;margin:0 auto}h1{font-size:24px;margin:0 0 2px;letter-spacing:-.01em}.sub{color:var(--mut);margin:0 0 24px}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:0 0 18px}
+.kpis{display:flex;gap:14px;flex-wrap:wrap;margin:0 0 18px}
+.kpi{flex:1;min-width:130px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.kpi .v{font-size:28px;font-weight:800;letter-spacing:-.02em}.kpi .k{color:var(--mut);font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+h2{font-size:15px;text-transform:uppercase;letter-spacing:.05em;color:var(--mut);margin:0 0 14px}
+.stage{display:flex;align-items:center;gap:14px;margin:0 0 10px}.stage .lbl{width:90px;font-weight:600;font-size:13px}
+.bar{flex:1;background:#f0f1f4;border-radius:8px;height:30px;position:relative;overflow:hidden}
+.fill{height:100%;background:linear-gradient(90deg,#7b2ff7,#a855f7);border-radius:8px}
+.bar .n{position:absolute;right:10px;top:5px;font-weight:700;font-size:13px}
+table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line)}
+th{color:var(--mut);font-size:11px;text-transform:uppercase;letter-spacing:.04em}
+.pill{font-size:11px;font-weight:700;padding:2px 9px;border-radius:20px}
+.pill.launched{background:#dcfce7;color:var(--ok)}.pill.reviewed{background:#fef3c7;color:var(--warn)}.pill.awaiting{background:#f1f0f4;color:var(--mut)}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+.foot{color:var(--mut);font-size:12px;margin-top:8px}
+</style></head><body><div class="wrap">
+<h1>Preset Adoption Tracker</h1>
+<p class="sub">Which daily presets the team actually uses — Proposed → Reviewed → Launched → Posted. Signal: #tik-agents thread replies (prototype).</p>
+<div class="kpis">
+  <div class="kpi"><div class="v">4</div><div class="k">Proposed</div></div>
+  <div class="kpi"><div class="v">0</div><div class="k">Reviewed</div></div>
+  <div class="kpi"><div class="v">0</div><div class="k">Launched</div></div>
+  <div class="kpi"><div class="v">0%</div><div class="k">Adoption rate</div></div>
+</div>
+<div class="card"><h2>Funnel</h2><div class="stage"><div class="lbl">Proposed</div><div class="bar"><div class="fill" style="width:100%"></div><span class="n">4</span></div></div><div class="stage"><div class="lbl">Reviewed</div><div class="bar"><div class="fill" style="width:0%"></div><span class="n">0</span></div></div><div class="stage"><div class="lbl">Launched</div><div class="bar"><div class="fill" style="width:0%"></div><span class="n">0</span></div></div><div class="stage"><div class="lbl">Posted</div><div class="bar"><div class="fill" style="width:0%"></div><span class="n">0</span></div></div></div>
+<div class="card"><h2>Presets</h2>
+<table><tr><th>Date</th><th>Preset</th><th>Category</th><th>Score</th><th>Status</th><th>Launched by</th><th>Shipped→CA</th><th>Posted</th><th>Skip reason</th><th>Assets</th></tr>
+<tr><td>2026-06-25</td><td><b>Skyline Reveal</b></td><td>cinematic</td><td>9.4</td><td><span class="pill awaiting">awaiting</span></td><td>—</td><td>no</td><td>—</td><td>—</td><td><a href="https://cdn-editing-temp.picsart.com/editing-temp/8a5d5e67-0f0a-42c4-a4b0-817e20cba5bd.mp4">video</a> · <a href="https://cdn-pipeline-output.picsart.com/pipeline-output/8db0f823-9ee9-4297-8d97-f9fd8652fd94.png">photo</a></td></tr><tr><td>2026-06-25</td><td><b>Valor Forge</b></td><td>transformation</td><td></td><td><span class="pill awaiting">awaiting</span></td><td>—</td><td>no</td><td>—</td><td>—</td><td><a href="https://cdn-editing-temp.picsart.com/editing-temp/d33429f1-0d49-4b7c-9496-799d2c692a0b.mp4">video</a> · <a href="https://cdn-pipeline-output.picsart.com/pipeline-output/350865d7-2984-49e7-8834-4a066384e545.png">photo</a></td></tr><tr><td>2026-06-24</td><td><b>Old Hollywood</b></td><td>nostalgia</td><td>10</td><td><span class="pill awaiting">awaiting</span></td><td>—</td><td>yes</td><td>—</td><td>—</td><td>— · —</td></tr><tr><td>2026-06-24</td><td><b>Quiet Luxury</b></td><td>glowup</td><td>8</td><td><span class="pill awaiting">awaiting</span></td><td>—</td><td>yes</td><td>—</td><td>—</td><td>— · —</td></tr></table>
+<p class="foot">Status is inferred from thread replies (launched / reviewed / awaiting). "Posted" & "Skip reason" come from the Google Sheet.</p></div>
+<div class="card"><h2>Reviewer engagement</h2>
+<table><tr><th>Reviewer</th><th>Launched</th><th>Reviewed</th></tr><tr><td>Lilit</td><td>0</td><td>0</td></tr><tr><td>Laura Nazinyan</td><td>0</td><td>0</td></tr><tr><td>Ruzanna Hunanyan</td><td>0</td><td>0</td></tr><tr><td>Emili Khachatryan</td><td>0</td><td>0</td></tr></table></div>
+<p class="foot">Auto-generated 2026-06-25 12:29 · prototype</p>
+</div></body></html>
